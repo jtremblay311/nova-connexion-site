@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Connexion | Partenaire de Croissance PME</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Variables Globales */
+        :root {
+            --primary-color: #042b46; /* Votre couleur officielle */
+            --accent-color: #0a5f9e;  /* Bleu électrique discret */
+            --text-dark: #042b46;
+            --text-gray: #52616b;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        /* Reset de base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+            padding-top: 130px; /* Espace pour le header fixe */
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        a { text-decoration: none; transition: var(--transition); }
+
+        /* --- HEADER & TOPBAR FIXE --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .top-bar {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .top-bar a { color: var(--white); margin-left: 20px; font-weight: 500; }
+        .top-bar a:hover { color: #ccc; }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo img { 
+            height: 60px; /* Hauteur contrôlée du logo */
+            width: auto;  /* Maintient le ratio */
+            display: block; 
+        }
+
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { color: var(--primary-color); font-weight: 600; font-size: 0.9rem; }
+        .nav-links a:not(.btn-contact):hover { color: var(--accent-color); }
+
+        .btn-contact {
+            background: var(--primary-color);
+            color: var(--white) !important;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .btn-contact:hover { background: var(--accent-color); transform: translateY(-2px); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(rgba(4, 43, 70, 0.92), rgba(4, 43, 70, 0.92)), 
+                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; font-weight: 700; }
+        .hero p { max-width: 800px; margin: 0 auto 50px; font-size: 1.3rem; opacity: 0.9; }
+
+        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn { padding: 16px 36px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; font-size: 1rem; }
+        
+        .btn-main { background: var(--accent-color); color: var(--white); }
+        .btn-main:hover { background: #084d80; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        
+        .btn-alt { border: 2px solid var(--white); color: var(--white); background: transparent; }
+        .btn-alt:hover { background: var(--white); color: var(--primary-color); }
+
+        /* --- STYLES DE SECTIONS --- */
+        section { padding: 100px 0; }
+        .bg-light { background-color: var(--bg-light); }
+        
+        .section-title { text-align: center; margin-bottom: 60px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary-color); position: relative; padding-bottom: 20px; margin-bottom: 15px; }
+        .section-title h2::after { content: ''; width: 80px; height: 5px; background: var(--accent-color); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+        .section-title p { color: var(--text-gray); font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+
+        /* --- CARDS & BLOCS --- */
+        .card { background: var(--white); padding: 50px; border-radius: 8px; border: 1px solid #eee; height: 100%; transition: var(--transition); }
+        .card:hover { box-shadow: 0 15px 40px rgba(4, 43, 70, 0.08); border-color: var(--accent-color); transform: translateY(-5px); }
+        .card h3 { margin-bottom: 20px; color: var(--primary-color); font-size: 1.4rem; }
+        .card p { color: var(--text-gray); margin-bottom: 0; }
+
+        .icon-bloc { text-align: center; }
+        .icon-bloc .icon { font-size: 4rem; margin-bottom: 25px; display: block; }
+        .icon-bloc h4 { color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem; }
+
+        /* Méthodologie */
+        .methodo-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .step { position: relative; text-align: center; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 8px;}
+        .step-num { font-size: 4rem; font-weight: 700; color: rgba(255, 255, 255, 0.1); line-height: 1; position: absolute; top: 15px; left: 15px; }
+        .step h4 { color: var(--white); position: relative; z-index: 2; margin-bottom: 15px; font-size: 1.3rem; margin-top: 20px;}
+        .step p { color: #ccc; position: relative; z-index: 2; margin-bottom: 0; }
+
+        /* FAQ */
+        .faq-wrapper { max-width: 800px; margin: 0 auto; }
+        .faq-item { margin-bottom: 20px; border: 1px solid #eee; border-radius: 6px; overflow: hidden; background: var(--white); }
+        .faq-question { padding: 20px 25px; cursor: pointer; font-weight: 600; background: #fff; display: flex; justify-content: space-between; align-items: center; color: var(--primary-color); }
+        .faq-question:hover { background: var(--bg-light); }
+        .faq-answer { padding: 0 25px 25px; color: var(--text-gray); border-top: 1px solid #eee; padding-top: 20px;}
+
+        /* Formulaire */
+        .contact-container { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; background: var(--white); padding: 60px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-color); font-size: 0.9rem; }
+        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--text-dark); }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(10, 95, 158, 0.1); }
+
+        .contact-info { background: var(--primary-color); color: var(--white); padding: 40px; border-radius: 8px; }
+        .contact-info h4 { margin-bottom: 30px; font-size: 1.3rem; }
+        .contact-info p { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; color: #ccc; }
+        .contact-info a { color: var(--white); font-weight: 600; }
+        .contact-info a:hover { color: #ccc; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary-color); color: rgba(255,255,255,0.8); padding: 80px 0 30px; font-size: 0.95rem; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+        
+        .footer-logo img { 
+            height: 70px; /* Légèrement plus grand dans le footer */
+            width: auto; 
+            margin-bottom: 25px; 
+            display: block;
+        }
+        
+        .footer-links h4 { color: var(--white); margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.7); }
+        .footer-links a:hover { color: var(--white); padding-left: 5px; }
+
+        .copy { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media (max-width: 992px) {
+            .contact-container { grid-template-columns: 1fr; padding: 40px; }
+            .grid-2, .intro-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 110px; }
+            .nav-links, .top-bar { display: none; } /* Menu mobile simplifié requis ici */
+            .hero { padding: 80px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-title h2 { font-size: 2rem; }
+            section { padding: 70px 0; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .footer-logo img { margin: 0 auto 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <span>📍 Service partout au Canada</span>
+                <a href="tel:4507121562">📞 450-712-1562</a>
+                <a href="mailto:info@novaconnexion.ca">✉️ info@novaconnexion.ca</a>
+            </div>
+        </div>
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Nova Connexion - Logo">
+            </a>
+            <div class="nav-links">
+                <a href="#solutions">Solutions</a>
+                <a href="#approche">Approche</a>
+                <a href="#methode">Méthodologie</a>
+                <a href="#contact" class="btn-contact">Consultation Gratuite</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Connecter pour croître</h1>
+                <p>Nova Connexion propulse la croissance des PME canadiennes grâce à des solutions mesurables combinant Marketing Local, Intelligence Artificielle et Efficacité Opérationnelle.</p>
+                <div class="cta-group">
+                    <a href="#contact" class="btn btn-main">Planifier un diagnostic</a>
+                    <a href="#solutions" class="btn btn-alt">Nos axes d'intervention</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="approche">
+            <div class="container">
+                <div class="grid-2 intro-grid">
+                    <div>
+                        <div class="section-title" style="text-align: left; margin-bottom: 30px;">
+                            <h2 style="left: 0; transform: none; margin-left: 0;">Des solutions concrètes</h2>
+                        </div>
+                        <p style="font-size: 1.15rem; color: var(--text-dark); margin-bottom: 20px;">Nova Connexion accompagne les dirigeants de PME avec une approche pragmatique, structurée et résolument orientée vers les résultats.</p>
+                        <p>Nous fusionnons expertise terrain, outils technologiques d'avant-garde et intelligence artificielle pour sculpter des solutions parfaitement adaptées à vos réalités opérationnelles. Notre priorité : un impact mesurable, sans complexité inutile.</p>
+                        <div style="margin-top: 40px;">
+                            <a href="#contact" class="btn btn-main">Parler à un expert</a>
+                        </div>
+                    </div>
+                    <div style="background: var(--primary-color); color: var(--white); padding: 50px; border-radius: 12px; box-shadow: 0 15px 35px rgba(4, 43, 70, 0.1);">
+                        <h3 style="margin-bottom: 25px; color: var(--white); font-size: 1.6rem;">L'avantage Nova Connexion</h3>
+                        <p style="font-weight: 600; color: #fff; margin-bottom: 15px;">✓ Résultats tangibles et mesurables (KPIs clairs)</p>
+                        <p style="font-weight: 600; color: #fff; margin-bottom: 15px;">✓ Synergie Expertise Terrain & Vision Technologique</p>
+                        <p style="font-weight: 600; color: #fff; margin-bottom: 15px;">✓ Solutions simples, agiles et faciles à déployer</p>
+                        <p style="font-weight: 600; color: #fff; margin-bottom: 0;">✓ Compréhension fine des défis des PME au Canada</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="solutions" class="bg-light">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Trois leviers stratégiques de croissance</h2>
+                    <p>Une approche holistique pour moderniser et développer votre entreprise.</p>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Visibilité locale</h3>
+                        <p>Dominez votre marché avec des campagnes ultra-ciblées, de l'impression stratégique, une distribution optimisée et des actions terrain percutantes pour atteindre les bons clients, au bon moment.</p>
+                    </div>
+                    <div class="card">
+                        <h3>IA Connexion</h3>
+                        <p>Libérez votre potentiel grâce à l'automatisation intelligente. Nous intégrons des solutions d'Intelligence Artificielle pragmatiques et puissantes pour optimiser vos flux et booster votre productivité.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Optimisation des opérations</h3>
+                        <p>Maximisez votre rentabilité en affinant vos processus internes. Gagnez du temps précieux, éliminez les frictions et élevez l'efficacité globale de votre organisation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-title">
+                    <h2>L'IA concrète pour votre PME</h2>
+                    <p>Découvrez comment nous appliquons la technologie pour résoudre vos défis quotidiens.</p>
+                </div>
+                <div class="grid-2 icon-grid">
+                    <div class="icon-bloc">
+                        <span class="icon">🤖</span>
+                        <h4>Qualification Intelligente</h4>
+                        <p style="max-width: 400px; margin: 0 auto;">Ne perdez plus de temps : l'IA trie et qualifie instantanément vos leads entrants pour concentrer vos ventes sur les opportunités les plus chaudes.</p>
+                    </div>
+                    <div class="icon-bloc">
+                        <span class="icon">📈</span>
+                        <h4>Prédiction de Demande Locale</h4>
+                        <p style="max-width: 400px; margin: 0 auto;">Optimisez vos stocks et vos ressources en anticipant les pics de demande spécifiques à votre zone géographique grâce à l'analyse prédictive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methode" style="background: var(--primary-color); color: var(--white);">
+            <div class="container">
+                <div class="section-title">
+                    <h2 style="color: white;">Une voie claire vers la performance</h2>
+                </div>
+                <div class="methodo-steps">
+                    <div class="step">
+                        <div class="step-num">01</div>
+                        <h4>Diagnostic & Opportunités</h4>
+                        <p>Analyse rigoureuse de votre situation actuelle et identification des leviers de croissance prioritaires.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">02</div>
+                        <h4>Stratégie & Architecture</h4>
+                        <p>Élaboration d'un plan d'action sur mesure, aligné sur vos objectifs et votre budget spécifique.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">03</div>
+                        <h4>Exécution & Suivi KPI</h4>
+                        <p>Déploiement agile de la solution avec un pilotage continu basé sur des indicateurs de performance réels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-light">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Questions Fréquentes</h2>
+                </div>
+                <div class="faq-wrapper">
+                    <div class="faq-item">
+                        <div class="faq-question">Comment garantissez-vous des résultats mesurables ? <span>+</span></div>
+                        <div class="faq-answer"><p>Dès la phase de diagnostic, nous définissons ensemble des KPIs (Indicateurs Clés de Performance) clairs et alignés sur vos objectifs d'affaires. Chaque solution déployée intègre des outils de suivi pour mesurer précisément l'impact et le retour sur investissement.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">L'IA n'est-elle pas réservée aux grandes entreprises ? <span>+</span></div>
+                        <div class="faq-answer"><p>C'est une idée reçue. Nova Connexion se spécialise justement dans la démocratisation de l'IA pour les PME. Nous intégrons des outils "no-code" ou "low-code" simples, abordables et immédiatement rentables, sans nécessiter de compétences techniques en interne.</p></div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Quels sont vos délais d'intervention types ? <span>+</span></div>
+                        <div class="faq-answer"><p>Nous privilégions l'agilité. Après un diagnostic rapide (généralement 1 à 2 semaines), les premières solutions concrètes peuvent être déployées en quelques semaines pour générer des résultats rapides ("Quick Wins").</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Prêt à accélérer votre croissance ?</h2>
+                    <p>Planifiez une consultation stratégique gratuite pour auditer votre potentiel de développement.</p>
+                </div>
+                
+                <div class="contact-container">
+                    <form>
+                        <div class="grid-2" style="gap: 20px;">
+                            <div class="form-group">
+                                <label>Nom Complet *</label>
+                                <input type="text" placeholder="Jean Dupont" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Entreprise</label>
+                                <input type="text" placeholder="Nom de votre PME">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Courriel Professionnel *</label>
+                            <input type="email" placeholder="nom@entreprise.ca" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Votre Besoin Principal</label>
+                            <textarea rows="5" placeholder="Décrivez brièvement votre défi..."></textarea>
+                        </div>
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button type="submit" class="btn btn-main" style="width: 100%; max-width: 300px;">Demander mon Diagnostic</button>
+                        </div>
+                    </form>
+                    
+                    <div class="contact-info">
+                        <h4>Coordonnées Directes</h4>
+                        <p>📍 Zone de service : Tout le Canada</p>
+                        <p>📞 Téléphone : <a href="tel:4507121562">450-712-1562</a></p>
+                        <p>✉️ Courriel : <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a></p>
+                        <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                            <a href="#" style="font-size: 1.2rem;">Suivez-nous sur LinkedIn 🔗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="Nova Connexion - Bas de page">
+                    <p>Votre partenaire stratégique pour une croissance durable et mesurable au Canada.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#solutions">Visibilité Locale</a></li>
+                        <li><a href="#solutions">IA Connexion</a></li>
+                        <li><a href="#solutions">Optimisation Opérationnelle</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📞 450-712-1562</li>
+                        <li>✉️ info@novaconnexion.ca</li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copy">
+                &copy; 2026 Nova Connexion. Tous droits réservés. Identité visuelle : #042b46 & Montserrat.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const answer = item.nextElementSibling;
+                const span = item.querySelector('span');
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    span.innerText = '+';
+                } else {
+                    answer.style.display = 'block';
+                    span.innerText = '-';
+                }
+            });
+            // Cacher les réponses par défaut
+            item.nextElementSibling.style.display = 'none';
+        });
+    </script>
+
+</body>
+</html>
