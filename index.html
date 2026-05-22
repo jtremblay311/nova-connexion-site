@@ -1,821 +1,709 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Connexion | Partenaire de Croissance PME</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #042b46;
-            --accent-color: #0a5f9e;
-            --text-dark: #042b46;
-            --text-gray: #52616b;
-            --bg-light: #f8f9fa;
-            --white: #ffffff;
-            --transition: all 0.3s ease;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Connexion | Partenaire de Croissance PME</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #042b46;
+      --primary-2: #073d63;
+      --accent: #12a39b;
+      --accent-2: #0a5f9e;
+      --warm: #f2a154;
+      --ink: #042b46;
+      --muted: #52616b;
+      --line: #dfe7ee;
+      --soft: #f4f7f9;
+      --white: #fff;
+      --shadow: 0 18px 45px rgba(4, 43, 70, 0.08);
+      --shadow-strong: 0 24px 70px rgba(4, 43, 70, 0.18);
+      --transition: all 0.25s ease;
+    }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #ffffff 0%, #f6f9fb 100%);
+      line-height: 1.6;
+      overflow-x: hidden;
+      padding-top: 128px;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; transition: var(--transition); }
+    .container { width: min(1200px, calc(100% - 48px)); margin: 0 auto; }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--white);
-            overflow-x: hidden;
-            padding-top: 130px;
-        }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(4, 43, 70, 0.08);
+      box-shadow: 0 10px 35px rgba(4, 43, 70, 0.06);
+    }
+    .top-bar {
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      color: var(--white);
+      font-size: 0.85rem;
+      padding: 10px 0;
+      text-align: right;
+    }
+    .top-bar a { margin-left: 20px; font-weight: 600; color: var(--white); }
+    .top-bar a:hover { color: #d9f4f1; }
+    nav { display: flex; align-items: center; gap: 22px; padding: 14px 0; }
+    .logo img { display: block; height: 64px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
+    .nav-links a { color: var(--primary); font-size: 0.88rem; font-weight: 700; }
+    .nav-links a:hover { color: var(--accent); }
+    .btn-contact {
+      background: var(--primary);
+      color: var(--white) !important;
+      border-radius: 4px;
+      padding: 12px 22px;
+      text-transform: uppercase;
+      box-shadow: 0 10px 25px rgba(4, 43, 70, 0.16);
+    }
+    .btn-contact:hover { background: var(--accent); transform: translateY(-2px); }
+    .language-switcher { display: flex; align-items: center; gap: 8px; color: var(--primary); font-size: 0.85rem; font-weight: 700; }
+    .language-switcher select {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--primary);
+      font: inherit;
+      padding: 9px 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(4, 43, 70, 0.06);
+    }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        a { text-decoration: none; transition: var(--transition); }
+    .hero {
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      color: var(--white);
+      text-align: left;
+      background: linear-gradient(115deg, rgba(4, 43, 70, 0.96) 0%, rgba(4, 43, 70, 0.84) 48%, rgba(18, 163, 155, 0.42) 100%), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000') center/cover no-repeat;
+      border-bottom: 6px solid var(--accent);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: #d9f4f1;
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ''; width: 38px; height: 3px; background: var(--warm); border-radius: 999px; }
+    .hero h1 { max-width: 780px; font-size: clamp(2.7rem, 5vw, 4.7rem); line-height: 1.05; margin-bottom: 22px; }
+    .hero p { max-width: 760px; margin-bottom: 46px; font-size: 1.24rem; opacity: 0.94; }
+    .cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 15px 32px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-main { color: var(--white); background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 14px 32px rgba(18, 163, 155, 0.26); }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(4, 43, 70, 0.22); }
+    .btn-main:disabled { opacity: 0.7; transform: none; cursor: not-allowed; box-shadow: none; }
+    .btn-alt { color: var(--white); border: 2px solid var(--white); background: transparent; }
+    .btn-alt:hover { color: var(--primary); background: var(--white); }
 
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-        }
+    section { padding: 96px 0; }
+    .bg-light { background: linear-gradient(180deg, var(--soft), #ffffff); }
+    .section-title { max-width: 760px; margin: 0 auto 58px; text-align: center; }
+    .section-title h2 { color: var(--primary); font-size: clamp(2rem, 4vw, 2.6rem); line-height: 1.14; padding-bottom: 20px; margin-bottom: 16px; position: relative; }
+    .section-title h2::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 84px; height: 5px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--warm)); }
+    .section-title p { color: var(--muted); font-size: 1.12rem; }
+    .section-title.align-left { margin: 0 0 30px; text-align: left; }
+    .section-title.align-left h2::after { left: 0; transform: none; }
 
-        .top-bar {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 10px 0;
-            font-size: 0.85rem;
-            text-align: right;
-        }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+    .card {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      padding: 44px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px rgba(4, 43, 70, 0.05);
+      transition: var(--transition);
+    }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(90deg, var(--accent), var(--warm)); }
+    .card:hover { transform: translateY(-6px); border-color: rgba(18, 163, 155, 0.45); box-shadow: var(--shadow); }
+    .card h3, .icon-bloc h4 { color: var(--primary); margin-bottom: 16px; font-size: 1.35rem; }
+    .card p, .icon-bloc p { color: var(--muted); }
+    .advantage-panel {
+      padding: 48px;
+      color: var(--white);
+      background: linear-gradient(145deg, var(--primary), var(--primary-2));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      box-shadow: var(--shadow-strong);
+    }
+    .advantage-panel h3 { color: var(--white); margin-bottom: 24px; font-size: 1.55rem; }
+    .advantage-panel p { margin-bottom: 14px; font-weight: 700; }
+    .icon-bloc { text-align: center; padding: 18px; }
+    .icon { display: block; margin-bottom: 22px; font-size: 4rem; }
 
-        .top-bar a { color: var(--white); margin-left: 20px; font-weight: 500; }
-        .top-bar a:hover { color: #ccc; }
+    .method-section { color: var(--white); background: linear-gradient(140deg, var(--primary), #07395c 70%, #0c6d74); }
+    .method-section .section-title h2 { color: var(--white); }
+    .methodo-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .step {
+      position: relative;
+      padding: 42px 34px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+    }
+    .step-num { position: absolute; top: 14px; left: 18px; color: rgba(255, 255, 255, 0.12); font-size: 4rem; font-weight: 700; line-height: 1; }
+    .step h4 { color: var(--white); margin: 24px 0 14px; font-size: 1.22rem; }
+    .step p { color: rgba(255, 255, 255, 0.74); }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 22px;
-            padding: 15px 0;
-        }
+    .faq-wrapper { max-width: 820px; margin: 0 auto; }
+    .faq-item { overflow: hidden; margin-bottom: 18px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 10px 30px rgba(4, 43, 70, 0.04); }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 24px; color: var(--primary); font-weight: 700; cursor: pointer; }
+    .faq-question:hover { background: var(--soft); }
+    .faq-answer { display: none; padding: 20px 24px 24px; color: var(--muted); border-top: 1px solid var(--line); }
 
-        .logo img { height: 60px; width: auto; display: block; }
-        .nav-links { display: flex; gap: 25px; align-items: center; }
-        .nav-links a { color: var(--primary-color); font-weight: 600; font-size: 0.9rem; }
-        .nav-links a:not(.btn-contact):hover { color: var(--accent-color); }
+    .contact-container { display: grid; grid-template-columns: 1.55fr 1fr; gap: 46px; padding: 58px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { display: block; margin-bottom: 8px; color: var(--primary); font-size: 0.9rem; font-weight: 700; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      color: var(--ink);
+      background: #fbfdfe;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font: inherit;
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(18, 163, 155, 0.14); }
+    .checkbox-label { display: flex !important; align-items: flex-start; gap: 12px; color: var(--muted) !important; font-size: 0.9rem !important; line-height: 1.5; }
+    .checkbox-label input { width: auto; min-width: 18px; height: 18px; margin-top: 3px; }
+    .checkbox-label a { color: var(--accent-2); font-weight: 700; }
+    .form-status { display: none; margin-top: 20px; padding: 14px 16px; border-radius: 4px; font-weight: 700; text-align: center; }
+    .form-status.success { display: block; color: #16623a; background: #e8f5ee; border: 1px solid #b9e2ca; }
+    .form-status.error { display: block; color: #9d1c1c; background: #fff0f0; border: 1px solid #f0b8b8; }
+    .form-status a { text-decoration: underline; }
+    .contact-info { padding: 40px; color: var(--white); background: linear-gradient(150deg, var(--primary), #06395e); border-radius: 8px; box-shadow: 0 18px 42px rgba(4, 43, 70, 0.16); }
+    .contact-info h4 { margin-bottom: 28px; font-size: 1.3rem; }
+    .contact-info p { display: flex; gap: 14px; align-items: center; margin-bottom: 18px; color: rgba(255, 255, 255, 0.78); }
+    .contact-info a { color: var(--white); font-weight: 700; }
+    .contact-info a:hover { color: #d9f4f1; }
+    .social-block { margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+    .social-title { margin-bottom: 14px !important; color: var(--white) !important; font-weight: 700; }
+    .social-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .social-link { display: inline-flex; min-height: 42px; align-items: center; justify-content: center; padding: 10px 14px; color: var(--white) !important; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 6px; font-weight: 700; }
+    .social-link:hover { background: var(--accent); transform: translateY(-2px); }
 
-        .language-switcher {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-left: auto;
-            color: var(--primary-color);
-            font-size: 0.85rem;
-            font-weight: 700;
-            white-space: nowrap;
-        }
+    .privacy-content { max-width: 920px; margin: 0 auto; padding: 42px; background: rgba(255, 255, 255, 0.72); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 16px 38px rgba(4, 43, 70, 0.05); }
+    .privacy-content h3 { margin: 34px 0 12px; color: var(--primary); font-size: 1.22rem; }
+    .privacy-content p, .privacy-content li { color: var(--muted); }
+    .privacy-content p { margin-bottom: 18px; }
+    .privacy-content ul { padding-left: 22px; margin-bottom: 18px; }
+    .privacy-content a { color: var(--accent-2); font-weight: 700; }
+    .policy-date { color: var(--primary) !important; font-weight: 700; }
 
-        .language-switcher select {
-            border: 1px solid #d8e0e7;
-            border-radius: 4px;
-            background: var(--white);
-            color: var(--primary-color);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            padding: 9px 10px;
-            cursor: pointer;
-        }
+    footer { color: rgba(255, 255, 255, 0.8); background: linear-gradient(145deg, #031f33, var(--primary)); padding: 80px 0 30px; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
+    .footer-logo img { height: 70px; width: auto; margin-bottom: 24px; display: block; }
+    .footer-links h4 { color: var(--white); margin-bottom: 22px; font-size: 1.05rem; }
+    .footer-links ul { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: rgba(255, 255, 255, 0.72); }
+    .footer-links a:hover { color: var(--white); padding-left: 5px; }
+    .copy { padding-top: 28px; text-align: center; color: rgba(255, 255, 255, 0.5); border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; }
 
-        .btn-contact {
-            background: var(--primary-color);
-            color: var(--white) !important;
-            padding: 12px 24px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-        .btn-contact:hover { background: var(--accent-color); transform: translateY(-2px); }
+    @media (max-width: 992px) {
+      body { padding-top: 92px; }
+      .top-bar, .nav-links { display: none; }
+      nav { padding: 12px 0; }
+      .logo img { height: 52px; }
+      .language-switcher { margin-left: auto; }
+      .language-switcher label { display: none; }
+      .hero { min-height: 560px; padding: 80px 0; }
+      .grid-2, .grid-3, .methodo-steps, .contact-container, .footer-grid { grid-template-columns: 1fr; }
+      .card, .advantage-panel, .contact-info { padding: 34px; }
+      .contact-container, .privacy-content { padding: 28px; }
+      .footer-grid { text-align: center; gap: 40px; }
+      .footer-logo img { margin: 0 auto 24px; }
+    }
 
-        .hero {
-            padding: 100px 0;
-            background: linear-gradient(rgba(4, 43, 70, 0.92), rgba(4, 43, 70, 0.92)),
-                        url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2000') no-repeat center center/cover;
-            color: var(--white);
-            text-align: center;
-        }
-
-        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; font-weight: 700; }
-        .hero p { max-width: 800px; margin: 0 auto 50px; font-size: 1.3rem; opacity: 0.9; }
-
-        .cta-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .btn { padding: 16px 36px; border-radius: 4px; font-weight: 700; cursor: pointer; border: none; font-size: 1rem; }
-        .btn-main { background: var(--accent-color); color: var(--white); }
-        .btn-main:hover { background: #084d80; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .btn-main:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
-        .btn-alt { border: 2px solid var(--white); color: var(--white); background: transparent; }
-        .btn-alt:hover { background: var(--white); color: var(--primary-color); }
-
-        section { padding: 100px 0; }
-        .bg-light { background-color: var(--bg-light); }
-
-        .section-title { text-align: center; margin-bottom: 60px; }
-        .section-title h2 { font-size: 2.5rem; color: var(--primary-color); position: relative; padding-bottom: 20px; margin-bottom: 15px; }
-        .section-title h2::after { content: ''; width: 80px; height: 5px; background: var(--accent-color); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
-        .section-title p { color: var(--text-gray); font-size: 1.2rem; max-width: 700px; margin: 0 auto; }
-        .section-title.align-left { text-align: left; margin-bottom: 30px; }
-        .section-title.align-left h2::after { left: 0; transform: none; }
-
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
-
-        .card { background: var(--white); padding: 50px; border-radius: 8px; border: 1px solid #eee; height: 100%; transition: var(--transition); }
-        .card:hover { box-shadow: 0 15px 40px rgba(4, 43, 70, 0.08); border-color: var(--accent-color); transform: translateY(-5px); }
-        .card h3 { margin-bottom: 20px; color: var(--primary-color); font-size: 1.4rem; }
-        .card p { color: var(--text-gray); margin-bottom: 0; }
-
-        .advantage-panel { background: var(--primary-color); color: var(--white); padding: 50px; border-radius: 12px; box-shadow: 0 15px 35px rgba(4, 43, 70, 0.1); }
-        .advantage-panel h3 { margin-bottom: 25px; color: var(--white); font-size: 1.6rem; }
-        .advantage-panel p { font-weight: 600; color: #fff; margin-bottom: 15px; }
-        .advantage-panel p:last-child { margin-bottom: 0; }
-
-        .icon-bloc { text-align: center; }
-        .icon-bloc .icon { font-size: 4rem; margin-bottom: 25px; display: block; }
-        .icon-bloc h4 { color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem; }
-        .icon-bloc p { max-width: 420px; margin: 0 auto; color: var(--text-gray); }
-
-        .method-section { background: var(--primary-color); color: var(--white); }
-        .method-section .section-title h2 { color: var(--white); }
-        .methodo-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
-        .step { position: relative; text-align: center; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 8px; }
-        .step-num { font-size: 4rem; font-weight: 700; color: rgba(255, 255, 255, 0.1); line-height: 1; position: absolute; top: 15px; left: 15px; }
-        .step h4 { color: var(--white); position: relative; z-index: 2; margin-bottom: 15px; font-size: 1.3rem; margin-top: 20px; }
-        .step p { color: #ccc; position: relative; z-index: 2; margin-bottom: 0; }
-
-        .faq-wrapper { max-width: 800px; margin: 0 auto; }
-        .faq-item { margin-bottom: 20px; border: 1px solid #eee; border-radius: 6px; overflow: hidden; background: var(--white); }
-        .faq-question { padding: 20px 25px; cursor: pointer; font-weight: 600; background: #fff; display: flex; justify-content: space-between; align-items: center; gap: 20px; color: var(--primary-color); }
-        .faq-question:hover { background: var(--bg-light); }
-        .faq-answer { padding: 20px 25px 25px; color: var(--text-gray); border-top: 1px solid #eee; }
-
-        .contact-container { display: grid; grid-template-columns: 1.5fr 1fr; gap: 50px; background: var(--white); padding: 60px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--primary-color); font-size: 0.9rem; }
-        .form-group input, .form-group textarea { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-size: 1rem; color: var(--text-dark); }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 0 3px rgba(10, 95, 158, 0.1); }
-        .checkbox-label { display: flex !important; align-items: flex-start; gap: 12px; line-height: 1.5; color: var(--text-gray) !important; font-size: 0.9rem !important; }
-        .checkbox-label input { width: auto; min-width: 18px; height: 18px; margin-top: 3px; }
-        .checkbox-label a { color: var(--accent-color); font-weight: 700; }
-        .form-status { display: none; margin-top: 20px; padding: 14px 16px; border-radius: 4px; font-weight: 600; text-align: center; }
-        .form-status.success { display: block; background: #e8f5ee; color: #16623a; border: 1px solid #b9e2ca; }
-        .form-status.error { display: block; background: #fff0f0; color: #9d1c1c; border: 1px solid #f0b8b8; }
-        .form-status a { color: inherit; text-decoration: underline; }
-
-        .contact-info { background: var(--primary-color); color: var(--white); padding: 40px; border-radius: 8px; }
-        .contact-info h4 { margin-bottom: 30px; font-size: 1.3rem; }
-        .contact-info p { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; color: #ccc; }
-        .contact-info a { color: var(--white); font-weight: 600; }
-        .contact-info a:hover { color: #ccc; }
-        .social-block { margin-top: 34px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
-        .social-title { margin-bottom: 14px !important; color: #fff !important; font-weight: 700; }
-        .social-links { display: flex; flex-wrap: wrap; gap: 10px; }
-        .social-link { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--white) !important; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); }
-        .social-link:hover { background: var(--accent-color); color: var(--white) !important; transform: translateY(-2px); }
-
-        .privacy-content { max-width: 900px; margin: 0 auto; }
-        .privacy-content h3 { color: var(--primary-color); font-size: 1.25rem; margin: 35px 0 12px; }
-        .privacy-content p { color: var(--text-gray); margin-bottom: 18px; }
-        .privacy-content ul { color: var(--text-gray); padding-left: 22px; margin-bottom: 18px; }
-        .privacy-content li { margin-bottom: 10px; }
-        .privacy-content a { color: var(--accent-color); font-weight: 700; }
-        .policy-date { font-weight: 700; color: var(--primary-color) !important; }
-
-        footer { background: var(--primary-color); color: rgba(255,255,255,0.8); padding: 80px 0 30px; font-size: 0.95rem; }
-        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 60px; margin-bottom: 50px; }
-        .footer-logo img { height: 70px; width: auto; margin-bottom: 25px; display: block; }
-        .footer-links h4 { color: var(--white); margin-bottom: 25px; font-size: 1.1rem; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: rgba(255,255,255,0.7); }
-        .footer-links a:hover { color: var(--white); padding-left: 5px; }
-        .copy { text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.85rem; color: rgba(255,255,255,0.5); }
-
-        @media (max-width: 992px) {
-            .contact-container { grid-template-columns: 1fr; padding: 40px; }
-            .grid-2, .intro-grid { grid-template-columns: 1fr; gap: 40px; }
-            nav { gap: 16px; }
-            .nav-links { gap: 16px; }
-        }
-
-        @media (max-width: 900px) {
-            body { padding-top: 92px; }
-            .top-bar { display: none; }
-            .nav-links { display: none; }
-            nav { padding: 12px 0; }
-            .logo img { height: 52px; }
-            .language-switcher label { display: none; }
-            .hero { padding: 80px 0; }
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .section-title h2 { font-size: 2rem; }
-            section { padding: 70px 0; }
-            .card, .advantage-panel, .contact-info { padding: 34px; }
-            .contact-container { padding: 28px; }
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-            .footer-logo img { margin: 0 auto 25px; }
-            .contact-info p { align-items: flex-start; }
-            .social-links { justify-content: flex-start; }
-        }
-    </style>
+    @media (max-width: 560px) {
+      .container { width: min(100% - 32px, 1200px); }
+      .hero h1 { font-size: 2.25rem; }
+      .hero p { font-size: 1.05rem; }
+      .btn { width: 100%; }
+      .social-links { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="top-bar">
-            <div class="container">
-                <span data-i18n="top.service">📍 Service partout au Canada</span>
-                <a href="tel:4507121562">📞 450-712-1562</a>
-                <a href="mailto:info@novaconnexion.ca">✉️ info@novaconnexion.ca</a>
-            </div>
+  <header>
+    <div class="top-bar">
+      <div class="container">
+        <span data-i18n="top.service">📍 Service partout au Canada</span>
+        <a href="tel:4507121562">📞 450-712-1562</a>
+        <a href="mailto:info@novaconnexion.ca">✉️ info@novaconnexion.ca</a>
+      </div>
+    </div>
+    <nav class="container">
+      <a href="#" class="logo" aria-label="Nova Connexion"><img src="logo.png" alt="Nova Connexion - Logo"></a>
+      <div class="nav-links">
+        <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
+        <a href="#approche" data-i18n="nav.approach">Approche</a>
+        <a href="#methode" data-i18n="nav.method">Méthodologie</a>
+        <a href="#confidentialite" data-i18n="nav.privacy">Confidentialité</a>
+        <a href="#contact" class="btn-contact" data-i18n="nav.cta">Consultation Gratuite</a>
+      </div>
+      <div class="language-switcher" aria-label="Sélecteur de langue" data-i18n-aria="lang.switcherLabel">
+        <label for="language-select" data-i18n="lang.label">Langue</label>
+        <select id="language-select"><option value="fr">FR</option><option value="en">EN</option></select>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Nova Connexion</p>
+        <h1 data-i18n="hero.title">Connecter pour croître</h1>
+        <p data-i18n="hero.text">Nova Connexion propulse la croissance des PME canadiennes grâce à des solutions mesurables combinant Marketing Local, Intelligence Artificielle et Efficacité Opérationnelle.</p>
+        <div class="cta-group">
+          <a href="#contact" class="btn btn-main" data-i18n="hero.primary">Planifier un diagnostic</a>
+          <a href="#solutions" class="btn btn-alt" data-i18n="hero.secondary">Nos axes d'intervention</a>
         </div>
-        <nav class="container">
-            <a href="#" class="logo" aria-label="Nova Connexion">
-                <img src="logo.png" alt="Nova Connexion - Logo">
-            </a>
-            <div class="nav-links">
-                <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
-                <a href="#approche" data-i18n="nav.approach">Approche</a>
-                <a href="#methode" data-i18n="nav.method">Méthodologie</a>
-                <a href="#confidentialite" data-i18n="nav.privacy">Confidentialité</a>
-                <a href="#contact" class="btn-contact" data-i18n="nav.cta">Consultation Gratuite</a>
-            </div>
-            <div class="language-switcher" aria-label="Sélecteur de langue" data-i18n-aria="lang.switcherLabel">
-                <label for="language-select" data-i18n="lang.label">Langue</label>
-                <select id="language-select">
-                    <option value="fr">FR</option>
-                    <option value="en">EN</option>
-                </select>
-            </div>
-        </nav>
-    </header>
+      </div>
+    </section>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h1 data-i18n="hero.title">Connecter pour croître</h1>
-                <p data-i18n="hero.text">Nova Connexion propulse la croissance des PME canadiennes grâce à des solutions mesurables combinant Marketing Local, Intelligence Artificielle et Efficacité Opérationnelle.</p>
-                <div class="cta-group">
-                    <a href="#contact" class="btn btn-main" data-i18n="hero.primary">Planifier un diagnostic</a>
-                    <a href="#solutions" class="btn btn-alt" data-i18n="hero.secondary">Nos axes d'intervention</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="approche">
-            <div class="container">
-                <div class="grid-2 intro-grid">
-                    <div>
-                        <div class="section-title align-left">
-                            <h2 data-i18n="approach.title">Des solutions concrètes</h2>
-                        </div>
-                        <p style="font-size: 1.15rem; color: var(--text-dark); margin-bottom: 20px;" data-i18n="approach.lead">Nova Connexion accompagne les dirigeants de PME avec une approche pragmatique, structurée et résolument orientée vers les résultats.</p>
-                        <p data-i18n="approach.body">Nous fusionnons expertise terrain, outils technologiques d'avant-garde et intelligence artificielle pour sculpter des solutions parfaitement adaptées à vos réalités opérationnelles. Notre priorité : un impact mesurable, sans complexité inutile.</p>
-                        <div style="margin-top: 40px;">
-                            <a href="#contact" class="btn btn-main" data-i18n="approach.cta">Parler à un expert</a>
-                        </div>
-                    </div>
-                    <div class="advantage-panel">
-                        <h3 data-i18n="advantage.title">L'avantage Nova Connexion</h3>
-                        <p data-i18n="advantage.one">✓ Résultats tangibles et mesurables (KPIs clairs)</p>
-                        <p data-i18n="advantage.two">✓ Synergie Expertise Terrain & Vision Technologique</p>
-                        <p data-i18n="advantage.three">✓ Solutions simples, agiles et faciles à déployer</p>
-                        <p data-i18n="advantage.four">✓ Compréhension fine des défis des PME au Canada</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="solutions" class="bg-light">
-            <div class="container">
-                <div class="section-title">
-                    <h2 data-i18n="solutions.title">Trois leviers stratégiques de croissance</h2>
-                    <p data-i18n="solutions.subtitle">Une approche holistique pour moderniser et développer votre entreprise.</p>
-                </div>
-                <div class="grid-3">
-                    <div class="card">
-                        <h3 data-i18n="solutions.card1.title">Visibilité locale</h3>
-                        <p data-i18n="solutions.card1.text">Dominez votre marché avec des campagnes ultra-ciblées, de l'impression stratégique, une distribution optimisée et des actions terrain percutantes pour atteindre les bons clients, au bon moment.</p>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="solutions.card2.title">IA Connexion</h3>
-                        <p data-i18n="solutions.card2.text">Libérez votre potentiel grâce à l'automatisation intelligente. Nous intégrons des solutions d'Intelligence Artificielle pragmatiques et puissantes pour optimiser vos flux et booster votre productivité.</p>
-                    </div>
-                    <div class="card">
-                        <h3 data-i18n="solutions.card3.title">Optimisation des opérations</h3>
-                        <p data-i18n="solutions.card3.text">Maximisez votre rentabilité en affinant vos processus internes. Gagnez du temps précieux, éliminez les frictions et élevez l'efficacité globale de votre organisation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <div class="container">
-                <div class="section-title">
-                    <h2 data-i18n="ai.title">L'IA concrète pour votre PME</h2>
-                    <p data-i18n="ai.subtitle">Découvrez comment nous appliquons la technologie pour résoudre vos défis quotidiens.</p>
-                </div>
-                <div class="grid-2 icon-grid">
-                    <div class="icon-bloc">
-                        <span class="icon">🤖</span>
-                        <h4 data-i18n="ai.card1.title">Qualification Intelligente</h4>
-                        <p data-i18n="ai.card1.text">Ne perdez plus de temps : l'IA trie et qualifie instantanément vos leads entrants pour concentrer vos ventes sur les opportunités les plus chaudes.</p>
-                    </div>
-                    <div class="icon-bloc">
-                        <span class="icon">📈</span>
-                        <h4 data-i18n="ai.card2.title">Prédiction de Demande Locale</h4>
-                        <p data-i18n="ai.card2.text">Optimisez vos stocks et vos ressources en anticipant les pics de demande spécifiques à votre zone géographique grâce à l'analyse prédictive.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="methode" class="method-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2 data-i18n="method.title">Une voie claire vers la performance</h2>
-                </div>
-                <div class="methodo-steps">
-                    <div class="step">
-                        <div class="step-num">01</div>
-                        <h4 data-i18n="method.step1.title">Diagnostic & Opportunités</h4>
-                        <p data-i18n="method.step1.text">Analyse rigoureuse de votre situation actuelle et identification des leviers de croissance prioritaires.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-num">02</div>
-                        <h4 data-i18n="method.step2.title">Stratégie & Architecture</h4>
-                        <p data-i18n="method.step2.text">Élaboration d'un plan d'action sur mesure, aligné sur vos objectifs et votre budget spécifique.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-num">03</div>
-                        <h4 data-i18n="method.step3.title">Exécution & Suivi KPI</h4>
-                        <p data-i18n="method.step3.text">Déploiement agile de la solution avec un pilotage continu basé sur des indicateurs de performance réels.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="bg-light">
-            <div class="container">
-                <div class="section-title">
-                    <h2 data-i18n="faq.title">Questions Fréquentes</h2>
-                </div>
-                <div class="faq-wrapper">
-                    <div class="faq-item">
-                        <div class="faq-question" data-i18n="faq.q1">Comment garantissez-vous des résultats mesurables ? <span>+</span></div>
-                        <div class="faq-answer"><p data-i18n="faq.a1">Dès la phase de diagnostic, nous définissons ensemble des KPIs (Indicateurs Clés de Performance) clairs et alignés sur vos objectifs d'affaires. Chaque solution déployée intègre des outils de suivi pour mesurer précisément l'impact et le retour sur investissement.</p></div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" data-i18n="faq.q2">L'IA n'est-elle pas réservée aux grandes entreprises ? <span>+</span></div>
-                        <div class="faq-answer"><p data-i18n="faq.a2">C'est une idée reçue. Nova Connexion se spécialise justement dans la démocratisation de l'IA pour les PME. Nous intégrons des outils "no-code" ou "low-code" simples, abordables et immédiatement rentables, sans nécessiter de compétences techniques en interne.</p></div>
-                    </div>
-                    <div class="faq-item">
-                        <div class="faq-question" data-i18n="faq.q3">Quels sont vos délais d'intervention types ? <span>+</span></div>
-                        <div class="faq-answer"><p data-i18n="faq.a3">Nous privilégions l'agilité. Après un diagnostic rapide (généralement 1 à 2 semaines), les premières solutions concrètes peuvent être déployées en quelques semaines pour générer des résultats rapides ("Quick Wins").</p></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="container">
-                <div class="section-title">
-                    <h2 data-i18n="contact.title">Prêt à accélérer votre croissance ?</h2>
-                    <p data-i18n="contact.subtitle">Planifiez une consultation stratégique gratuite pour auditer votre potentiel de développement.</p>
-                </div>
-                <div class="contact-container">
-                    <form id="contact-form" action="https://formsubmit.co/info@novaconnexion.ca" method="POST">
-                        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-                        <input id="form-subject" type="hidden" name="_subject" value="Nouvelle demande de diagnostic - Nova Connexion" data-i18n-value="form.subject">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
-                        <div class="grid-2" style="gap: 20px;">
-                            <div class="form-group">
-                                <label for="nom" data-i18n="form.nameLabel">Nom Complet *</label>
-                                <input id="nom" name="nom" type="text" placeholder="Jean Dupont" data-i18n-placeholder="form.namePlaceholder" autocomplete="name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="entreprise" data-i18n="form.companyLabel">Entreprise</label>
-                                <input id="entreprise" name="entreprise" type="text" placeholder="Nom de votre PME" data-i18n-placeholder="form.companyPlaceholder" autocomplete="organization">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" data-i18n="form.emailLabel">Courriel Professionnel *</label>
-                            <input id="email" name="email" type="email" placeholder="nom@entreprise.ca" data-i18n-placeholder="form.emailPlaceholder" autocomplete="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" data-i18n="form.messageLabel">Votre Besoin Principal</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Décrivez brièvement votre défi..." data-i18n-placeholder="form.messagePlaceholder"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label class="checkbox-label">
-                                <input id="privacy-consent" name="consentement_confidentialite" type="checkbox" value="J'accepte la politique de confidentialité" required>
-                                <span data-i18n="form.consent">J'accepte que Nova Connexion utilise mes renseignements pour répondre à ma demande, conformément à la <a href="#confidentialite">politique de confidentialité</a>.</span>
-                            </label>
-                        </div>
-                        <div style="text-align: center; margin-top: 30px;">
-                            <button id="contact-submit" type="submit" class="btn btn-main" style="width: 100%; max-width: 300px;" data-i18n="form.submit">Demander mon Diagnostic</button>
-                        </div>
-                        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-                    </form>
-
-                    <div class="contact-info">
-                        <h4 data-i18n="contact.infoTitle">Coordonnées Directes</h4>
-                        <p data-i18n="contact.zone">📍 Zone de service : Tout le Canada</p>
-                        <p>📞 <span data-i18n="contact.phoneLabel">Téléphone :</span> <a href="tel:4507121562">450-712-1562</a></p>
-                        <p>✉️ <span data-i18n="contact.emailLabel">Courriel :</span> <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a></p>
-                        <div class="social-block">
-                            <p class="social-title" data-i18n="social.follow">Suivez-nous</p>
-                            <div class="social-links" aria-label="Réseaux sociaux Nova Connexion" data-i18n-aria="social.aria">
-                                <a class="social-link" href="https://www.linkedin.com/company/nova-connexion" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                                <a class="social-link" href="https://www.facebook.com/profile.php?id=61587641420283&amp;mibextid=wwXIfr&amp;rdid=oD3Trgjgqk0qCR9x&amp;share_url" target="_blank" rel="noopener noreferrer">Facebook</a>
-                                <a class="social-link" href="https://www.instagram.com/novaconnexion.inc" target="_blank" rel="noopener noreferrer">Instagram</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="confidentialite" class="bg-light privacy-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2 data-i18n="privacy.title">Politique de confidentialité</h2>
-                    <p data-i18n="privacy.subtitle">Une explication claire de la façon dont Nova Connexion traite les renseignements transmis sur ce site.</p>
-                </div>
-                <div class="privacy-content">
-                    <p class="policy-date" data-i18n="privacy.date">Dernière mise à jour : 21 mai 2026</p>
-                    <p data-i18n="privacy.intro">La présente politique explique comment Nova Connexion collecte, utilise, communique, conserve et protège les renseignements personnels transmis par l'entremise de ce site Web, notamment au moyen du formulaire de contact.</p>
-
-                    <h3 data-i18n="privacy.collectTitle">1. Renseignements que nous collectons</h3>
-                    <p data-i18n="privacy.collectText">Lorsque vous utilisez le formulaire, nous pouvons collecter votre nom, le nom de votre entreprise, votre adresse courriel, votre message et votre consentement à cette politique. Des renseignements techniques nécessaires au fonctionnement du site peuvent aussi être traités par nos fournisseurs, par exemple l'adresse IP, le navigateur utilisé et les pages consultées.</p>
-
-                    <h3 data-i18n="privacy.useTitle">2. Utilisation des renseignements</h3>
-                    <ul>
-                        <li data-i18n="privacy.useOne">Répondre à votre demande et planifier une consultation ou un diagnostic.</li>
-                        <li data-i18n="privacy.useTwo">Communiquer avec vous au sujet de nos services.</li>
-                        <li data-i18n="privacy.useThree">Améliorer notre site, nos communications et nos processus internes.</li>
-                        <li data-i18n="privacy.useFour">Respecter nos obligations légales et protéger nos droits.</li>
-                    </ul>
-
-                    <h3 data-i18n="privacy.consentTitle">3. Consentement</h3>
-                    <p data-i18n="privacy.consentText">En soumettant le formulaire, vous consentez à ce que Nova Connexion utilise les renseignements fournis pour traiter votre demande. Vous pouvez retirer votre consentement en tout temps, sous réserve des obligations légales applicables, en nous écrivant à <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a>.</p>
-
-                    <h3 data-i18n="privacy.shareTitle">4. Communication à des fournisseurs</h3>
-                    <p data-i18n="privacy.shareText">Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Les liens vers LinkedIn, Facebook et Instagram mènent vers des plateformes externes qui appliquent leurs propres politiques. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.</p>
-
-                    <h3 data-i18n="privacy.retentionTitle">5. Conservation et sécurité</h3>
-                    <p data-i18n="privacy.retentionText">Nous conservons les renseignements seulement pendant la période nécessaire aux fins indiquées dans cette politique ou pour satisfaire à nos obligations légales. Nous appliquons des mesures raisonnables pour protéger les renseignements, mais aucune transmission par Internet ne peut être garantie comme étant parfaitement sécurisée.</p>
-
-                    <h3 data-i18n="privacy.rightsTitle">6. Vos droits</h3>
-                    <p data-i18n="privacy.rightsText">Vous pouvez demander l'accès à vos renseignements personnels, leur rectification, le retrait de votre consentement ou leur suppression lorsque la loi le permet. Vous pouvez aussi poser une question ou déposer une plainte concernant nos pratiques de confidentialité.</p>
-
-                    <h3 data-i18n="privacy.contactTitle">7. Responsable de la protection des renseignements personnels</h3>
-                    <p data-i18n="privacy.contactText">Pour toute demande liée à la confidentialité, contactez le responsable de la protection des renseignements personnels de Nova Connexion à <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a>.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-logo">
-                    <img src="logo.png" alt="Nova Connexion - Bas de page">
-                    <p data-i18n="footer.description">Votre partenaire stratégique pour une croissance durable et mesurable au Canada.</p>
-                </div>
-                <div class="footer-links">
-                    <h4 data-i18n="footer.solutionsTitle">Solutions</h4>
-                    <ul>
-                        <li><a href="#solutions" data-i18n="footer.solutionOne">Visibilité Locale</a></li>
-                        <li><a href="#solutions" data-i18n="footer.solutionTwo">IA Connexion</a></li>
-                        <li><a href="#solutions" data-i18n="footer.solutionThree">Optimisation Opérationnelle</a></li>
-                    </ul>
-                </div>
-                <div class="footer-links">
-                    <h4 data-i18n="footer.contactTitle">Contact</h4>
-                    <ul>
-                        <li>📞 450-712-1562</li>
-                        <li>✉️ info@novaconnexion.ca</li>
-                        <li><a href="#confidentialite" data-i18n="footer.privacy">Politique de confidentialité</a></li>
-                        <li><a href="https://www.linkedin.com/company/nova-connexion" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a href="https://www.facebook.com/profile.php?id=61587641420283&amp;mibextid=wwXIfr&amp;rdid=oD3Trgjgqk0qCR9x&amp;share_url" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                        <li><a href="https://www.instagram.com/novaconnexion.inc" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copy" data-i18n="footer.copy">&copy; 2026 Nova Connexion. Tous droits réservés. Identité visuelle : #042b46 & Montserrat.</div>
+    <section id="approche">
+      <div class="container grid-2 intro-grid">
+        <div>
+          <div class="section-title align-left"><h2 data-i18n="approach.title">Des solutions concrètes</h2></div>
+          <p style="font-size: 1.15rem; color: var(--ink); margin-bottom: 20px;" data-i18n="approach.lead">Nova Connexion accompagne les dirigeants de PME avec une approche pragmatique, structurée et résolument orientée vers les résultats.</p>
+          <p data-i18n="approach.body">Nous fusionnons expertise terrain, outils technologiques d'avant-garde et intelligence artificielle pour sculpter des solutions parfaitement adaptées à vos réalités opérationnelles. Notre priorité : un impact mesurable, sans complexité inutile.</p>
+          <div style="margin-top: 38px;"><a href="#contact" class="btn btn-main" data-i18n="approach.cta">Parler à un expert</a></div>
         </div>
-    </footer>
+        <div class="advantage-panel">
+          <h3 data-i18n="advantage.title">L'avantage Nova Connexion</h3>
+          <p data-i18n="advantage.one">✓ Résultats tangibles et mesurables (KPIs clairs)</p>
+          <p data-i18n="advantage.two">✓ Synergie Expertise Terrain & Vision Technologique</p>
+          <p data-i18n="advantage.three">✓ Solutions simples, agiles et faciles à déployer</p>
+          <p data-i18n="advantage.four">✓ Compréhension fine des défis des PME au Canada</p>
+        </div>
+      </div>
+    </section>
 
-    <script>
-        const translations = {
-            fr: {
-                "meta.title": "Nova Connexion | Partenaire de Croissance PME",
-                "lang.label": "Langue",
-                "lang.switcherLabel": "Sélecteur de langue",
-                "top.service": "📍 Service partout au Canada",
-                "nav.solutions": "Solutions",
-                "nav.approach": "Approche",
-                "nav.method": "Méthodologie",
-                "nav.privacy": "Confidentialité",
-                "nav.cta": "Consultation Gratuite",
-                "hero.title": "Connecter pour croître",
-                "hero.text": "Nova Connexion propulse la croissance des PME canadiennes grâce à des solutions mesurables combinant Marketing Local, Intelligence Artificielle et Efficacité Opérationnelle.",
-                "hero.primary": "Planifier un diagnostic",
-                "hero.secondary": "Nos axes d'intervention",
-                "approach.title": "Des solutions concrètes",
-                "approach.lead": "Nova Connexion accompagne les dirigeants de PME avec une approche pragmatique, structurée et résolument orientée vers les résultats.",
-                "approach.body": "Nous fusionnons expertise terrain, outils technologiques d'avant-garde et intelligence artificielle pour sculpter des solutions parfaitement adaptées à vos réalités opérationnelles. Notre priorité : un impact mesurable, sans complexité inutile.",
-                "approach.cta": "Parler à un expert",
-                "advantage.title": "L'avantage Nova Connexion",
-                "advantage.one": "✓ Résultats tangibles et mesurables (KPIs clairs)",
-                "advantage.two": "✓ Synergie Expertise Terrain & Vision Technologique",
-                "advantage.three": "✓ Solutions simples, agiles et faciles à déployer",
-                "advantage.four": "✓ Compréhension fine des défis des PME au Canada",
-                "solutions.title": "Trois leviers stratégiques de croissance",
-                "solutions.subtitle": "Une approche holistique pour moderniser et développer votre entreprise.",
-                "solutions.card1.title": "Visibilité locale",
-                "solutions.card1.text": "Dominez votre marché avec des campagnes ultra-ciblées, de l'impression stratégique, une distribution optimisée et des actions terrain percutantes pour atteindre les bons clients, au bon moment.",
-                "solutions.card2.title": "IA Connexion",
-                "solutions.card2.text": "Libérez votre potentiel grâce à l'automatisation intelligente. Nous intégrons des solutions d'Intelligence Artificielle pragmatiques et puissantes pour optimiser vos flux et booster votre productivité.",
-                "solutions.card3.title": "Optimisation des opérations",
-                "solutions.card3.text": "Maximisez votre rentabilité en affinant vos processus internes. Gagnez du temps précieux, éliminez les frictions et élevez l'efficacité globale de votre organisation.",
-                "ai.title": "L'IA concrète pour votre PME",
-                "ai.subtitle": "Découvrez comment nous appliquons la technologie pour résoudre vos défis quotidiens.",
-                "ai.card1.title": "Qualification Intelligente",
-                "ai.card1.text": "Ne perdez plus de temps : l'IA trie et qualifie instantanément vos leads entrants pour concentrer vos ventes sur les opportunités les plus chaudes.",
-                "ai.card2.title": "Prédiction de Demande Locale",
-                "ai.card2.text": "Optimisez vos stocks et vos ressources en anticipant les pics de demande spécifiques à votre zone géographique grâce à l'analyse prédictive.",
-                "method.title": "Une voie claire vers la performance",
-                "method.step1.title": "Diagnostic & Opportunités",
-                "method.step1.text": "Analyse rigoureuse de votre situation actuelle et identification des leviers de croissance prioritaires.",
-                "method.step2.title": "Stratégie & Architecture",
-                "method.step2.text": "Élaboration d'un plan d'action sur mesure, aligné sur vos objectifs et votre budget spécifique.",
-                "method.step3.title": "Exécution & Suivi KPI",
-                "method.step3.text": "Déploiement agile de la solution avec un pilotage continu basé sur des indicateurs de performance réels.",
-                "faq.title": "Questions Fréquentes",
-                "faq.q1": "Comment garantissez-vous des résultats mesurables ? <span>+</span>",
-                "faq.a1": "Dès la phase de diagnostic, nous définissons ensemble des KPIs (Indicateurs Clés de Performance) clairs et alignés sur vos objectifs d'affaires. Chaque solution déployée intègre des outils de suivi pour mesurer précisément l'impact et le retour sur investissement.",
-                "faq.q2": "L'IA n'est-elle pas réservée aux grandes entreprises ? <span>+</span>",
-                "faq.a2": "C'est une idée reçue. Nova Connexion se spécialise justement dans la démocratisation de l'IA pour les PME. Nous intégrons des outils \"no-code\" ou \"low-code\" simples, abordables et immédiatement rentables, sans nécessiter de compétences techniques en interne.",
-                "faq.q3": "Quels sont vos délais d'intervention types ? <span>+</span>",
-                "faq.a3": "Nous privilégions l'agilité. Après un diagnostic rapide (généralement 1 à 2 semaines), les premières solutions concrètes peuvent être déployées en quelques semaines pour générer des résultats rapides (\"Quick Wins\").",
-                "contact.title": "Prêt à accélérer votre croissance ?",
-                "contact.subtitle": "Planifiez une consultation stratégique gratuite pour auditer votre potentiel de développement.",
-                "contact.infoTitle": "Coordonnées Directes",
-                "contact.zone": "📍 Zone de service : Tout le Canada",
-                "contact.phoneLabel": "Téléphone :",
-                "contact.emailLabel": "Courriel :",
-                "form.subject": "Nouvelle demande de diagnostic - Nova Connexion",
-                "form.nameLabel": "Nom Complet *",
-                "form.namePlaceholder": "Jean Dupont",
-                "form.companyLabel": "Entreprise",
-                "form.companyPlaceholder": "Nom de votre PME",
-                "form.emailLabel": "Courriel Professionnel *",
-                "form.emailPlaceholder": "nom@entreprise.ca",
-                "form.messageLabel": "Votre Besoin Principal",
-                "form.messagePlaceholder": "Décrivez brièvement votre défi...",
-                "form.consent": "J'accepte que Nova Connexion utilise mes renseignements pour répondre à ma demande, conformément à la <a href=\"#confidentialite\">politique de confidentialité</a>.",
-                "form.consentValue": "J'accepte la politique de confidentialité",
-                "form.submit": "Demander mon Diagnostic",
-                "form.sending": "Envoi en cours...",
-                "form.success": "Merci. Votre demande a bien été envoyée.",
-                "form.error": "L'envoi a échoué. Vous pouvez aussi nous écrire à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
-                "social.follow": "Suivez-nous",
-                "social.aria": "Réseaux sociaux Nova Connexion",
-                "privacy.title": "Politique de confidentialité",
-                "privacy.subtitle": "Une explication claire de la façon dont Nova Connexion traite les renseignements transmis sur ce site.",
-                "privacy.date": "Dernière mise à jour : 21 mai 2026",
-                "privacy.intro": "La présente politique explique comment Nova Connexion collecte, utilise, communique, conserve et protège les renseignements personnels transmis par l'entremise de ce site Web, notamment au moyen du formulaire de contact.",
-                "privacy.collectTitle": "1. Renseignements que nous collectons",
-                "privacy.collectText": "Lorsque vous utilisez le formulaire, nous pouvons collecter votre nom, le nom de votre entreprise, votre adresse courriel, votre message et votre consentement à cette politique. Des renseignements techniques nécessaires au fonctionnement du site peuvent aussi être traités par nos fournisseurs, par exemple l'adresse IP, le navigateur utilisé et les pages consultées.",
-                "privacy.useTitle": "2. Utilisation des renseignements",
-                "privacy.useOne": "Répondre à votre demande et planifier une consultation ou un diagnostic.",
-                "privacy.useTwo": "Communiquer avec vous au sujet de nos services.",
-                "privacy.useThree": "Améliorer notre site, nos communications et nos processus internes.",
-                "privacy.useFour": "Respecter nos obligations légales et protéger nos droits.",
-                "privacy.consentTitle": "3. Consentement",
-                "privacy.consentText": "En soumettant le formulaire, vous consentez à ce que Nova Connexion utilise les renseignements fournis pour traiter votre demande. Vous pouvez retirer votre consentement en tout temps, sous réserve des obligations légales applicables, en nous écrivant à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
-                "privacy.shareTitle": "4. Communication à des fournisseurs",
-                "privacy.shareText": "Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Les liens vers LinkedIn, Facebook et Instagram mènent vers des plateformes externes qui appliquent leurs propres politiques. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.",
-                "privacy.retentionTitle": "5. Conservation et sécurité",
-                "privacy.retentionText": "Nous conservons les renseignements seulement pendant la période nécessaire aux fins indiquées dans cette politique ou pour satisfaire à nos obligations légales. Nous appliquons des mesures raisonnables pour protéger les renseignements, mais aucune transmission par Internet ne peut être garantie comme étant parfaitement sécurisée.",
-                "privacy.rightsTitle": "6. Vos droits",
-                "privacy.rightsText": "Vous pouvez demander l'accès à vos renseignements personnels, leur rectification, le retrait de votre consentement ou leur suppression lorsque la loi le permet. Vous pouvez aussi poser une question ou déposer une plainte concernant nos pratiques de confidentialité.",
-                "privacy.contactTitle": "7. Responsable de la protection des renseignements personnels",
-                "privacy.contactText": "Pour toute demande liée à la confidentialité, contactez le responsable de la protection des renseignements personnels de Nova Connexion à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
-                "footer.description": "Votre partenaire stratégique pour une croissance durable et mesurable au Canada.",
-                "footer.solutionsTitle": "Solutions",
-                "footer.solutionOne": "Visibilité Locale",
-                "footer.solutionTwo": "IA Connexion",
-                "footer.solutionThree": "Optimisation Opérationnelle",
-                "footer.contactTitle": "Contact",
-                "footer.privacy": "Politique de confidentialité",
-                "footer.copy": "&copy; 2026 Nova Connexion. Tous droits réservés. Identité visuelle : #042b46 & Montserrat."
-            },
-            en: {
-                "meta.title": "Nova Connexion | Growth Partner for SMEs",
-                "lang.label": "Language",
-                "lang.switcherLabel": "Language selector",
-                "top.service": "📍 Serving businesses across Canada",
-                "nav.solutions": "Solutions",
-                "nav.approach": "Approach",
-                "nav.method": "Method",
-                "nav.privacy": "Privacy",
-                "nav.cta": "Free Consultation",
-                "hero.title": "Connect to grow",
-                "hero.text": "Nova Connexion accelerates the growth of Canadian SMEs with measurable solutions combining local marketing, artificial intelligence and operational efficiency.",
-                "hero.primary": "Plan a diagnostic",
-                "hero.secondary": "Our areas of action",
-                "approach.title": "Concrete solutions",
-                "approach.lead": "Nova Connexion supports SME leaders with a pragmatic, structured and results-focused approach.",
-                "approach.body": "We combine field expertise, advanced technology tools and artificial intelligence to shape solutions that fit your operational reality. Our priority: measurable impact without unnecessary complexity.",
-                "approach.cta": "Talk to an expert",
-                "advantage.title": "The Nova Connexion advantage",
-                "advantage.one": "✓ Tangible, measurable results with clear KPIs",
-                "advantage.two": "✓ Field expertise combined with technological vision",
-                "advantage.three": "✓ Simple, agile solutions that are easy to deploy",
-                "advantage.four": "✓ A strong understanding of SME challenges in Canada",
-                "solutions.title": "Three strategic growth levers",
-                "solutions.subtitle": "A holistic approach to modernize and grow your business.",
-                "solutions.card1.title": "Local visibility",
-                "solutions.card1.text": "Stand out in your market with targeted campaigns, strategic print, optimized distribution and high-impact field actions that reach the right clients at the right time.",
-                "solutions.card2.title": "AI Connexion",
-                "solutions.card2.text": "Unlock your potential with intelligent automation. We integrate practical, powerful AI solutions to optimize workflows and boost productivity.",
-                "solutions.card3.title": "Operations optimization",
-                "solutions.card3.text": "Increase profitability by refining internal processes. Save valuable time, remove friction and raise your organization's overall efficiency.",
-                "ai.title": "Practical AI for your SME",
-                "ai.subtitle": "See how we apply technology to solve everyday business challenges.",
-                "ai.card1.title": "Intelligent Qualification",
-                "ai.card1.text": "Stop wasting time: AI sorts and qualifies incoming leads so your sales efforts stay focused on the strongest opportunities.",
-                "ai.card2.title": "Local Demand Forecasting",
-                "ai.card2.text": "Optimize inventory and resources by anticipating demand peaks in your geographic area through predictive analysis.",
-                "method.title": "A clear path to performance",
-                "method.step1.title": "Diagnostic & Opportunities",
-                "method.step1.text": "A rigorous analysis of your current situation and identification of priority growth levers.",
-                "method.step2.title": "Strategy & Architecture",
-                "method.step2.text": "A custom action plan aligned with your goals and specific budget.",
-                "method.step3.title": "Execution & KPI Tracking",
-                "method.step3.text": "Agile deployment with ongoing management based on real performance indicators.",
-                "faq.title": "Frequently Asked Questions",
-                "faq.q1": "How do you guarantee measurable results? <span>+</span>",
-                "faq.a1": "Starting with the diagnostic phase, we define clear KPIs aligned with your business objectives. Each solution includes tracking tools to measure impact and return on investment.",
-                "faq.q2": "Isn't AI only for large companies? <span>+</span>",
-                "faq.a2": "No. Nova Connexion specializes in making AI accessible to SMEs. We integrate simple, affordable and profitable no-code or low-code tools without requiring internal technical expertise.",
-                "faq.q3": "What are your typical implementation timelines? <span>+</span>",
-                "faq.a3": "We prioritize agility. After a quick diagnostic, usually 1 to 2 weeks, the first concrete solutions can be deployed within a few weeks to generate quick wins.",
-                "contact.title": "Ready to accelerate your growth?",
-                "contact.subtitle": "Plan a free strategic consultation to assess your development potential.",
-                "contact.infoTitle": "Direct Contact",
-                "contact.zone": "📍 Service area: Across Canada",
-                "contact.phoneLabel": "Phone:",
-                "contact.emailLabel": "Email:",
-                "form.subject": "New diagnostic request - Nova Connexion",
-                "form.nameLabel": "Full Name *",
-                "form.namePlaceholder": "John Smith",
-                "form.companyLabel": "Company",
-                "form.companyPlaceholder": "Your SME name",
-                "form.emailLabel": "Professional Email *",
-                "form.emailPlaceholder": "name@company.ca",
-                "form.messageLabel": "Main Need",
-                "form.messagePlaceholder": "Briefly describe your challenge...",
-                "form.consent": "I agree that Nova Connexion may use my information to respond to my request, in accordance with the <a href=\"#confidentialite\">privacy policy</a>.",
-                "form.consentValue": "I accept the privacy policy",
-                "form.submit": "Request My Diagnostic",
-                "form.sending": "Sending...",
-                "form.success": "Thank you. Your request has been sent.",
-                "form.error": "The submission failed. You can also email us at <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
-                "social.follow": "Follow us",
-                "social.aria": "Nova Connexion social media",
-                "privacy.title": "Privacy Policy",
-                "privacy.subtitle": "A clear explanation of how Nova Connexion handles information submitted through this site.",
-                "privacy.date": "Last updated: May 21, 2026",
-                "privacy.intro": "This policy explains how Nova Connexion collects, uses, shares, keeps and protects personal information submitted through this website, including through the contact form.",
-                "privacy.collectTitle": "1. Information we collect",
-                "privacy.collectText": "When you use the form, we may collect your name, company name, email address, message and consent to this policy. Technical information necessary for the site to operate may also be processed by our providers, such as IP address, browser used and pages visited.",
-                "privacy.useTitle": "2. How we use information",
-                "privacy.useOne": "To respond to your request and plan a consultation or diagnostic.",
-                "privacy.useTwo": "To communicate with you about our services.",
-                "privacy.useThree": "To improve our website, communications and internal processes.",
-                "privacy.useFour": "To meet legal obligations and protect our rights.",
-                "privacy.consentTitle": "3. Consent",
-                "privacy.consentText": "By submitting the form, you consent to Nova Connexion using the information provided to process your request. You may withdraw your consent at any time, subject to applicable legal obligations, by writing to <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
-                "privacy.shareTitle": "4. Disclosure to service providers",
-                "privacy.shareText": "We do not sell personal information. We may use technical service providers to operate the site and receive forms, including Vercel for hosting, FormSubmit for form transmission, Google Fonts for typography and Unsplash for certain images. Links to LinkedIn, Facebook and Instagram lead to external platforms that apply their own policies. These providers may process information outside Quebec or Canada according to their own practices.",
-                "privacy.retentionTitle": "5. Retention and security",
-                "privacy.retentionText": "We keep information only as long as necessary for the purposes described in this policy or to meet legal obligations. We apply reasonable safeguards to protect information, but no Internet transmission can be guaranteed as perfectly secure.",
-                "privacy.rightsTitle": "6. Your rights",
-                "privacy.rightsText": "You may request access to your personal information, correction, withdrawal of consent or deletion where permitted by law. You may also ask a question or file a complaint about our privacy practices.",
-                "privacy.contactTitle": "7. Privacy Officer",
-                "privacy.contactText": "For any privacy request, contact Nova Connexion's Privacy Officer at <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
-                "footer.description": "Your strategic partner for sustainable and measurable growth in Canada.",
-                "footer.solutionsTitle": "Solutions",
-                "footer.solutionOne": "Local Visibility",
-                "footer.solutionTwo": "AI Connexion",
-                "footer.solutionThree": "Operations Optimization",
-                "footer.contactTitle": "Contact",
-                "footer.privacy": "Privacy Policy",
-                "footer.copy": "&copy; 2026 Nova Connexion. All rights reserved. Visual identity: #042b46 & Montserrat."
-            }
-        };
+    <section id="solutions" class="bg-light">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="solutions.title">Trois leviers stratégiques de croissance</h2>
+          <p data-i18n="solutions.subtitle">Une approche holistique pour moderniser et développer votre entreprise.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><h3 data-i18n="solutions.card1.title">Visibilité locale</h3><p data-i18n="solutions.card1.text">Dominez votre marché avec des campagnes ultra-ciblées, de l'impression stratégique, une distribution optimisée et des actions terrain percutantes pour atteindre les bons clients, au bon moment.</p></article>
+          <article class="card"><h3 data-i18n="solutions.card2.title">IA Connexion</h3><p data-i18n="solutions.card2.text">Libérez votre potentiel grâce à l'automatisation intelligente. Nous intégrons des solutions d'Intelligence Artificielle pragmatiques et puissantes pour optimiser vos flux et booster votre productivité.</p></article>
+          <article class="card"><h3 data-i18n="solutions.card3.title">Optimisation des opérations</h3><p data-i18n="solutions.card3.text">Maximisez votre rentabilité en affinant vos processus internes. Gagnez du temps précieux, éliminez les frictions et élevez l'efficacité globale de votre organisation.</p></article>
+        </div>
+      </div>
+    </section>
 
-        const languageSelect = document.getElementById('language-select');
-        const contactForm = document.getElementById('contact-form');
-        const formStatus = document.getElementById('form-status');
-        const submitButton = document.getElementById('contact-submit');
-        const privacyConsent = document.getElementById('privacy-consent');
-        const formSubject = document.getElementById('form-subject');
+    <section>
+      <div class="container">
+        <div class="section-title"><h2 data-i18n="ai.title">L'IA concrète pour votre PME</h2><p data-i18n="ai.subtitle">Découvrez comment nous appliquons la technologie pour résoudre vos défis quotidiens.</p></div>
+        <div class="grid-2">
+          <div class="icon-bloc"><span class="icon">🤖</span><h4 data-i18n="ai.card1.title">Qualification Intelligente</h4><p data-i18n="ai.card1.text">Ne perdez plus de temps : l'IA trie et qualifie instantanément vos leads entrants pour concentrer vos ventes sur les opportunités les plus chaudes.</p></div>
+          <div class="icon-bloc"><span class="icon">📈</span><h4 data-i18n="ai.card2.title">Prédiction de Demande Locale</h4><p data-i18n="ai.card2.text">Optimisez vos stocks et vos ressources en anticipant les pics de demande spécifiques à votre zone géographique grâce à l'analyse prédictive.</p></div>
+        </div>
+      </div>
+    </section>
 
-        function applyLanguage(lang) {
-            const dictionary = translations[lang] || translations.fr;
-            document.documentElement.lang = lang;
-            document.title = dictionary['meta.title'];
+    <section id="methode" class="method-section">
+      <div class="container">
+        <div class="section-title"><h2 data-i18n="method.title">Une voie claire vers la performance</h2></div>
+        <div class="methodo-steps">
+          <div class="step"><div class="step-num">01</div><h4 data-i18n="method.step1.title">Diagnostic & Opportunités</h4><p data-i18n="method.step1.text">Analyse rigoureuse de votre situation actuelle et identification des leviers de croissance prioritaires.</p></div>
+          <div class="step"><div class="step-num">02</div><h4 data-i18n="method.step2.title">Stratégie & Architecture</h4><p data-i18n="method.step2.text">Élaboration d'un plan d'action sur mesure, aligné sur vos objectifs et votre budget spécifique.</p></div>
+          <div class="step"><div class="step-num">03</div><h4 data-i18n="method.step3.title">Exécution & Suivi KPI</h4><p data-i18n="method.step3.text">Déploiement agile de la solution avec un pilotage continu basé sur des indicateurs de performance réels.</p></div>
+        </div>
+      </div>
+    </section>
 
-            document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (dictionary[key]) element.innerHTML = dictionary[key];
-            });
+    <section class="bg-light">
+      <div class="container">
+        <div class="section-title"><h2 data-i18n="faq.title">Questions Fréquentes</h2></div>
+        <div class="faq-wrapper">
+          <div class="faq-item"><div class="faq-question" data-i18n="faq.q1">Comment garantissez-vous des résultats mesurables ? <span>+</span></div><div class="faq-answer"><p data-i18n="faq.a1">Dès la phase de diagnostic, nous définissons ensemble des KPIs (Indicateurs Clés de Performance) clairs et alignés sur vos objectifs d'affaires. Chaque solution déployée intègre des outils de suivi pour mesurer précisément l'impact et le retour sur investissement.</p></div></div>
+          <div class="faq-item"><div class="faq-question" data-i18n="faq.q2">L'IA n'est-elle pas réservée aux grandes entreprises ? <span>+</span></div><div class="faq-answer"><p data-i18n="faq.a2">C'est une idée reçue. Nova Connexion se spécialise justement dans la démocratisation de l'IA pour les PME. Nous intégrons des outils "no-code" ou "low-code" simples, abordables et immédiatement rentables, sans nécessiter de compétences techniques en interne.</p></div></div>
+          <div class="faq-item"><div class="faq-question" data-i18n="faq.q3">Quels sont vos délais d'intervention types ? <span>+</span></div><div class="faq-answer"><p data-i18n="faq.a3">Nous privilégions l'agilité. Après un diagnostic rapide (généralement 1 à 2 semaines), les premières solutions concrètes peuvent être déployées en quelques semaines pour générer des résultats rapides ("Quick Wins").</p></div></div>
+        </div>
+      </div>
+    </section>
 
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-                const key = element.getAttribute('data-i18n-placeholder');
-                if (dictionary[key]) element.setAttribute('placeholder', dictionary[key]);
-            });
+    <section id="contact">
+      <div class="container">
+        <div class="section-title"><h2 data-i18n="contact.title">Prêt à accélérer votre croissance ?</h2><p data-i18n="contact.subtitle">Planifiez une consultation stratégique gratuite pour auditer votre potentiel de développement.</p></div>
+        <div class="contact-container">
+          <form id="contact-form" action="https://formsubmit.co/info@novaconnexion.ca" method="POST">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+            <input id="form-subject" type="hidden" name="_subject" value="Nouvelle demande de diagnostic - Nova Connexion" data-i18n-value="form.subject">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <div class="grid-2" style="gap: 20px;"><div class="form-group"><label for="nom" data-i18n="form.nameLabel">Nom Complet *</label><input id="nom" name="nom" type="text" placeholder="Jean Dupont" data-i18n-placeholder="form.namePlaceholder" autocomplete="name" required></div><div class="form-group"><label for="entreprise" data-i18n="form.companyLabel">Entreprise</label><input id="entreprise" name="entreprise" type="text" placeholder="Nom de votre PME" data-i18n-placeholder="form.companyPlaceholder" autocomplete="organization"></div></div>
+            <div class="form-group"><label for="email" data-i18n="form.emailLabel">Courriel Professionnel *</label><input id="email" name="email" type="email" placeholder="nom@entreprise.ca" data-i18n-placeholder="form.emailPlaceholder" autocomplete="email" required></div>
+            <div class="form-group"><label for="message" data-i18n="form.messageLabel">Votre Besoin Principal</label><textarea id="message" name="message" rows="5" placeholder="Décrivez brièvement votre défi..." data-i18n-placeholder="form.messagePlaceholder"></textarea></div>
+            <div class="form-group"><label class="checkbox-label"><input id="privacy-consent" name="consentement_confidentialite" type="checkbox" value="J'accepte la politique de confidentialité" required><span data-i18n="form.consent">J'accepte que Nova Connexion utilise mes renseignements pour répondre à ma demande, conformément à la <a href="#confidentialite">politique de confidentialité</a>.</span></label></div>
+            <div style="text-align:center; margin-top: 30px;"><button id="contact-submit" type="submit" class="btn btn-main" style="width:100%; max-width:300px;" data-i18n="form.submit">Demander mon Diagnostic</button></div>
+            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <aside class="contact-info">
+            <h4 data-i18n="contact.infoTitle">Coordonnées Directes</h4>
+            <p data-i18n="contact.zone">📍 Zone de service : Tout le Canada</p>
+            <p>📞 <span data-i18n="contact.phoneLabel">Téléphone :</span> <a href="tel:4507121562">450-712-1562</a></p>
+            <p>✉️ <span data-i18n="contact.emailLabel">Courriel :</span> <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a></p>
+            <div class="social-block"><p class="social-title" data-i18n="social.follow">Suivez-nous</p><div class="social-links" aria-label="Réseaux sociaux Nova Connexion" data-i18n-aria="social.aria"><a class="social-link" href="https://www.linkedin.com/company/nova-connexion" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="social-link" href="https://www.facebook.com/profile.php?id=61587641420283&amp;mibextid=wwXIfr&amp;rdid=oD3Trgjgqk0qCR9x&amp;share_url" target="_blank" rel="noopener noreferrer">Facebook</a><a class="social-link" href="https://www.instagram.com/novaconnexion.inc" target="_blank" rel="noopener noreferrer">Instagram</a></div></div>
+          </aside>
+        </div>
+      </div>
+    </section>
 
-            document.querySelectorAll('[data-i18n-value]').forEach(element => {
-                const key = element.getAttribute('data-i18n-value');
-                if (dictionary[key]) element.value = dictionary[key];
-            });
+    <section id="confidentialite" class="bg-light privacy-section">
+      <div class="container">
+        <div class="section-title"><h2 data-i18n="privacy.title">Politique de confidentialité</h2><p data-i18n="privacy.subtitle">Une explication claire de la façon dont Nova Connexion traite les renseignements transmis sur ce site.</p></div>
+        <div class="privacy-content">
+          <p class="policy-date" data-i18n="privacy.date">Dernière mise à jour : 21 mai 2026</p>
+          <p data-i18n="privacy.intro">La présente politique explique comment Nova Connexion collecte, utilise, communique, conserve et protège les renseignements personnels transmis par l'entremise de ce site Web, notamment au moyen du formulaire de contact.</p>
+          <h3 data-i18n="privacy.collectTitle">1. Renseignements que nous collectons</h3><p data-i18n="privacy.collectText">Lorsque vous utilisez le formulaire, nous pouvons collecter votre nom, le nom de votre entreprise, votre adresse courriel, votre message et votre consentement à cette politique. Des renseignements techniques nécessaires au fonctionnement du site peuvent aussi être traités par nos fournisseurs, par exemple l'adresse IP, le navigateur utilisé et les pages consultées.</p>
+          <h3 data-i18n="privacy.useTitle">2. Utilisation des renseignements</h3><ul><li data-i18n="privacy.useOne">Répondre à votre demande et planifier une consultation ou un diagnostic.</li><li data-i18n="privacy.useTwo">Communiquer avec vous au sujet de nos services.</li><li data-i18n="privacy.useThree">Améliorer notre site, nos communications et nos processus internes.</li><li data-i18n="privacy.useFour">Respecter nos obligations légales et protéger nos droits.</li></ul>
+          <h3 data-i18n="privacy.consentTitle">3. Consentement</h3><p data-i18n="privacy.consentText">En soumettant le formulaire, vous consentez à ce que Nova Connexion utilise les renseignements fournis pour traiter votre demande. Vous pouvez retirer votre consentement en tout temps, sous réserve des obligations légales applicables, en nous écrivant à <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a>.</p>
+          <h3 data-i18n="privacy.shareTitle">4. Communication à des fournisseurs</h3><p data-i18n="privacy.shareText">Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Les liens vers LinkedIn, Facebook et Instagram mènent vers des plateformes externes qui appliquent leurs propres politiques. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.</p>
+          <h3 data-i18n="privacy.retentionTitle">5. Conservation et sécurité</h3><p data-i18n="privacy.retentionText">Nous conservons les renseignements seulement pendant la période nécessaire aux fins indiquées dans cette politique ou pour satisfaire à nos obligations légales. Nous appliquons des mesures raisonnables pour protéger les renseignements, mais aucune transmission par Internet ne peut être garantie comme étant parfaitement sécurisée.</p>
+          <h3 data-i18n="privacy.rightsTitle">6. Vos droits</h3><p data-i18n="privacy.rightsText">Vous pouvez demander l'accès à vos renseignements personnels, leur rectification, le retrait de votre consentement ou leur suppression lorsque la loi le permet. Vous pouvez aussi poser une question ou déposer une plainte concernant nos pratiques de confidentialité.</p>
+          <h3 data-i18n="privacy.contactTitle">7. Responsable de la protection des renseignements personnels</h3><p data-i18n="privacy.contactText">Pour toute demande liée à la confidentialité, contactez le responsable de la protection des renseignements personnels de Nova Connexion à <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-            document.querySelectorAll('[data-i18n-aria]').forEach(element => {
-                const key = element.getAttribute('data-i18n-aria');
-                if (dictionary[key]) element.setAttribute('aria-label', dictionary[key]);
-            });
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-logo"><img src="logo.png" alt="Nova Connexion - Bas de page"><p data-i18n="footer.description">Votre partenaire stratégique pour une croissance durable et mesurable au Canada.</p></div>
+        <div class="footer-links"><h4 data-i18n="footer.solutionsTitle">Solutions</h4><ul><li><a href="#solutions" data-i18n="footer.solutionOne">Visibilité Locale</a></li><li><a href="#solutions" data-i18n="footer.solutionTwo">IA Connexion</a></li><li><a href="#solutions" data-i18n="footer.solutionThree">Optimisation Opérationnelle</a></li></ul></div>
+        <div class="footer-links"><h4 data-i18n="footer.contactTitle">Contact</h4><ul><li>📞 450-712-1562</li><li>✉️ info@novaconnexion.ca</li><li><a href="#confidentialite" data-i18n="footer.privacy">Politique de confidentialité</a></li><li><a href="https://www.linkedin.com/company/nova-connexion" target="_blank" rel="noopener noreferrer">LinkedIn</a></li><li><a href="https://www.facebook.com/profile.php?id=61587641420283&amp;mibextid=wwXIfr&amp;rdid=oD3Trgjgqk0qCR9x&amp;share_url" target="_blank" rel="noopener noreferrer">Facebook</a></li><li><a href="https://www.instagram.com/novaconnexion.inc" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul></div>
+      </div>
+      <div class="copy" data-i18n="footer.copy">&copy; 2026 Nova Connexion. Tous droits réservés. Identité visuelle : #042b46 & Montserrat.</div>
+    </div>
+  </footer>
 
-            if (privacyConsent) privacyConsent.value = dictionary['form.consentValue'];
-            if (formSubject) formSubject.value = dictionary['form.subject'];
-            localStorage.setItem('nova-language', lang);
-        }
+  <script>
+    const translations = {
+      fr: {
+        "meta.title": "Nova Connexion | Partenaire de Croissance PME",
+        "lang.label": "Langue",
+        "lang.switcherLabel": "Sélecteur de langue",
+        "top.service": "📍 Service partout au Canada",
+        "nav.solutions": "Solutions",
+        "nav.approach": "Approche",
+        "nav.method": "Méthodologie",
+        "nav.privacy": "Confidentialité",
+        "nav.cta": "Consultation Gratuite",
+        "hero.eyebrow": "Nova Connexion",
+        "hero.title": "Connecter pour croître",
+        "hero.text": "Nova Connexion propulse la croissance des PME canadiennes grâce à des solutions mesurables combinant Marketing Local, Intelligence Artificielle et Efficacité Opérationnelle.",
+        "hero.primary": "Planifier un diagnostic",
+        "hero.secondary": "Nos axes d'intervention",
+        "approach.title": "Des solutions concrètes",
+        "approach.lead": "Nova Connexion accompagne les dirigeants de PME avec une approche pragmatique, structurée et résolument orientée vers les résultats.",
+        "approach.body": "Nous fusionnons expertise terrain, outils technologiques d'avant-garde et intelligence artificielle pour sculpter des solutions parfaitement adaptées à vos réalités opérationnelles. Notre priorité : un impact mesurable, sans complexité inutile.",
+        "approach.cta": "Parler à un expert",
+        "advantage.title": "L'avantage Nova Connexion",
+        "advantage.one": "✓ Résultats tangibles et mesurables (KPIs clairs)",
+        "advantage.two": "✓ Synergie Expertise Terrain & Vision Technologique",
+        "advantage.three": "✓ Solutions simples, agiles et faciles à déployer",
+        "advantage.four": "✓ Compréhension fine des défis des PME au Canada",
+        "solutions.title": "Trois leviers stratégiques de croissance",
+        "solutions.subtitle": "Une approche holistique pour moderniser et développer votre entreprise.",
+        "solutions.card1.title": "Visibilité locale",
+        "solutions.card1.text": "Dominez votre marché avec des campagnes ultra-ciblées, de l'impression stratégique, une distribution optimisée et des actions terrain percutantes pour atteindre les bons clients, au bon moment.",
+        "solutions.card2.title": "IA Connexion",
+        "solutions.card2.text": "Libérez votre potentiel grâce à l'automatisation intelligente. Nous intégrons des solutions d'Intelligence Artificielle pragmatiques et puissantes pour optimiser vos flux et booster votre productivité.",
+        "solutions.card3.title": "Optimisation des opérations",
+        "solutions.card3.text": "Maximisez votre rentabilité en affinant vos processus internes. Gagnez du temps précieux, éliminez les frictions et élevez l'efficacité globale de votre organisation.",
+        "ai.title": "L'IA concrète pour votre PME",
+        "ai.subtitle": "Découvrez comment nous appliquons la technologie pour résoudre vos défis quotidiens.",
+        "ai.card1.title": "Qualification Intelligente",
+        "ai.card1.text": "Ne perdez plus de temps : l'IA trie et qualifie instantanément vos leads entrants pour concentrer vos ventes sur les opportunités les plus chaudes.",
+        "ai.card2.title": "Prédiction de Demande Locale",
+        "ai.card2.text": "Optimisez vos stocks et vos ressources en anticipant les pics de demande spécifiques à votre zone géographique grâce à l'analyse prédictive.",
+        "method.title": "Une voie claire vers la performance",
+        "method.step1.title": "Diagnostic & Opportunités",
+        "method.step1.text": "Analyse rigoureuse de votre situation actuelle et identification des leviers de croissance prioritaires.",
+        "method.step2.title": "Stratégie & Architecture",
+        "method.step2.text": "Élaboration d'un plan d'action sur mesure, aligné sur vos objectifs et votre budget spécifique.",
+        "method.step3.title": "Exécution & Suivi KPI",
+        "method.step3.text": "Déploiement agile de la solution avec un pilotage continu basé sur des indicateurs de performance réels.",
+        "faq.title": "Questions Fréquentes",
+        "faq.q1": "Comment garantissez-vous des résultats mesurables ? <span>+</span>",
+        "faq.a1": "Dès la phase de diagnostic, nous définissons ensemble des KPIs clairs et alignés sur vos objectifs d'affaires. Chaque solution déployée intègre des outils de suivi pour mesurer précisément l'impact et le retour sur investissement.",
+        "faq.q2": "L'IA n'est-elle pas réservée aux grandes entreprises ? <span>+</span>",
+        "faq.a2": "C'est une idée reçue. Nova Connexion se spécialise dans la démocratisation de l'IA pour les PME avec des outils simples, abordables et immédiatement rentables.",
+        "faq.q3": "Quels sont vos délais d'intervention types ? <span>+</span>",
+        "faq.a3": "Après un diagnostic rapide, les premières solutions concrètes peuvent être déployées en quelques semaines pour générer des résultats rapides.",
+        "contact.title": "Prêt à accélérer votre croissance ?",
+        "contact.subtitle": "Planifiez une consultation stratégique gratuite pour auditer votre potentiel de développement.",
+        "contact.infoTitle": "Coordonnées Directes",
+        "contact.zone": "📍 Zone de service : Tout le Canada",
+        "contact.phoneLabel": "Téléphone :",
+        "contact.emailLabel": "Courriel :",
+        "form.subject": "Nouvelle demande de diagnostic - Nova Connexion",
+        "form.nameLabel": "Nom Complet *",
+        "form.namePlaceholder": "Jean Dupont",
+        "form.companyLabel": "Entreprise",
+        "form.companyPlaceholder": "Nom de votre PME",
+        "form.emailLabel": "Courriel Professionnel *",
+        "form.emailPlaceholder": "nom@entreprise.ca",
+        "form.messageLabel": "Votre Besoin Principal",
+        "form.messagePlaceholder": "Décrivez brièvement votre défi...",
+        "form.consent": "J'accepte que Nova Connexion utilise mes renseignements pour répondre à ma demande, conformément à la <a href=\"#confidentialite\">politique de confidentialité</a>.",
+        "form.consentValue": "J'accepte la politique de confidentialité",
+        "form.submit": "Demander mon Diagnostic",
+        "form.sending": "Envoi en cours...",
+        "form.success": "Merci. Votre demande a bien été envoyée.",
+        "form.error": "L'envoi a échoué. Vous pouvez aussi nous écrire à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+        "social.follow": "Suivez-nous",
+        "social.aria": "Réseaux sociaux Nova Connexion",
+        "privacy.title": "Politique de confidentialité",
+        "privacy.subtitle": "Une explication claire de la façon dont Nova Connexion traite les renseignements transmis sur ce site.",
+        "privacy.date": "Dernière mise à jour : 21 mai 2026",
+        "privacy.intro": "La présente politique explique comment Nova Connexion collecte, utilise, communique, conserve et protège les renseignements personnels transmis par l'entremise de ce site Web, notamment au moyen du formulaire de contact.",
+        "privacy.collectTitle": "1. Renseignements que nous collectons",
+        "privacy.collectText": "Lorsque vous utilisez le formulaire, nous pouvons collecter votre nom, le nom de votre entreprise, votre adresse courriel, votre message et votre consentement à cette politique. Des renseignements techniques nécessaires au fonctionnement du site peuvent aussi être traités par nos fournisseurs, par exemple l'adresse IP, le navigateur utilisé et les pages consultées.",
+        "privacy.useTitle": "2. Utilisation des renseignements",
+        "privacy.useOne": "Répondre à votre demande et planifier une consultation ou un diagnostic.",
+        "privacy.useTwo": "Communiquer avec vous au sujet de nos services.",
+        "privacy.useThree": "Améliorer notre site, nos communications et nos processus internes.",
+        "privacy.useFour": "Respecter nos obligations légales et protéger nos droits.",
+        "privacy.consentTitle": "3. Consentement",
+        "privacy.consentText": "En soumettant le formulaire, vous consentez à ce que Nova Connexion utilise les renseignements fournis pour traiter votre demande. Vous pouvez retirer votre consentement en tout temps, sous réserve des obligations légales applicables, en nous écrivant à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+        "privacy.shareTitle": "4. Communication à des fournisseurs",
+        "privacy.shareText": "Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Les liens vers LinkedIn, Facebook et Instagram mènent vers des plateformes externes qui appliquent leurs propres politiques. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.",
+        "privacy.retentionTitle": "5. Conservation et sécurité",
+        "privacy.retentionText": "Nous conservons les renseignements seulement pendant la période nécessaire aux fins indiquées dans cette politique ou pour satisfaire à nos obligations légales. Nous appliquons des mesures raisonnables pour protéger les renseignements, mais aucune transmission par Internet ne peut être garantie comme étant parfaitement sécurisée.",
+        "privacy.rightsTitle": "6. Vos droits",
+        "privacy.rightsText": "Vous pouvez demander l'accès à vos renseignements personnels, leur rectification, le retrait de votre consentement ou leur suppression lorsque la loi le permet. Vous pouvez aussi poser une question ou déposer une plainte concernant nos pratiques de confidentialité.",
+        "privacy.contactTitle": "7. Responsable de la protection des renseignements personnels",
+        "privacy.contactText": "Pour toute demande liée à la confidentialité, contactez le responsable de la protection des renseignements personnels de Nova Connexion à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+        "footer.description": "Votre partenaire stratégique pour une croissance durable et mesurable au Canada.",
+        "footer.solutionsTitle": "Solutions",
+        "footer.solutionOne": "Visibilité Locale",
+        "footer.solutionTwo": "IA Connexion",
+        "footer.solutionThree": "Optimisation Opérationnelle",
+        "footer.contactTitle": "Contact",
+        "footer.privacy": "Politique de confidentialité",
+        "footer.copy": "&copy; 2026 Nova Connexion. Tous droits réservés. Identité visuelle : #042b46 & Montserrat."
+      },
+      en: {
+        "meta.title": "Nova Connexion | Growth Partner for SMEs",
+        "lang.label": "Language",
+        "lang.switcherLabel": "Language selector",
+        "top.service": "📍 Serving businesses across Canada",
+        "nav.solutions": "Solutions",
+        "nav.approach": "Approach",
+        "nav.method": "Method",
+        "nav.privacy": "Privacy",
+        "nav.cta": "Free Consultation",
+        "hero.eyebrow": "Nova Connexion",
+        "hero.title": "Connect to grow",
+        "hero.text": "Nova Connexion accelerates the growth of Canadian SMEs with measurable solutions combining local marketing, artificial intelligence and operational efficiency.",
+        "hero.primary": "Plan a diagnostic",
+        "hero.secondary": "Our areas of action",
+        "approach.title": "Concrete solutions",
+        "approach.lead": "Nova Connexion supports SME leaders with a pragmatic, structured and results-focused approach.",
+        "approach.body": "We combine field expertise, advanced technology tools and artificial intelligence to shape solutions that fit your operational reality. Our priority: measurable impact without unnecessary complexity.",
+        "approach.cta": "Talk to an expert",
+        "advantage.title": "The Nova Connexion advantage",
+        "advantage.one": "✓ Tangible, measurable results with clear KPIs",
+        "advantage.two": "✓ Field expertise combined with technological vision",
+        "advantage.three": "✓ Simple, agile solutions that are easy to deploy",
+        "advantage.four": "✓ A strong understanding of SME challenges in Canada",
+        "solutions.title": "Three strategic growth levers",
+        "solutions.subtitle": "A holistic approach to modernize and grow your business.",
+        "solutions.card1.title": "Local visibility",
+        "solutions.card1.text": "Stand out in your market with targeted campaigns, strategic print, optimized distribution and high-impact field actions that reach the right clients at the right time.",
+        "solutions.card2.title": "AI Connexion",
+        "solutions.card2.text": "Unlock your potential with intelligent automation. We integrate practical, powerful AI solutions to optimize workflows and boost productivity.",
+        "solutions.card3.title": "Operations optimization",
+        "solutions.card3.text": "Increase profitability by refining internal processes. Save valuable time, remove friction and raise your organization's overall efficiency.",
+        "ai.title": "Practical AI for your SME",
+        "ai.subtitle": "See how we apply technology to solve everyday business challenges.",
+        "ai.card1.title": "Intelligent Qualification",
+        "ai.card1.text": "Stop wasting time: AI sorts and qualifies incoming leads so your sales efforts stay focused on the strongest opportunities.",
+        "ai.card2.title": "Local Demand Forecasting",
+        "ai.card2.text": "Optimize inventory and resources by anticipating demand peaks in your geographic area through predictive analysis.",
+        "method.title": "A clear path to performance",
+        "method.step1.title": "Diagnostic & Opportunities",
+        "method.step1.text": "A rigorous analysis of your current situation and identification of priority growth levers.",
+        "method.step2.title": "Strategy & Architecture",
+        "method.step2.text": "A custom action plan aligned with your goals and specific budget.",
+        "method.step3.title": "Execution & KPI Tracking",
+        "method.step3.text": "Agile deployment with ongoing management based on real performance indicators.",
+        "faq.title": "Frequently Asked Questions",
+        "faq.q1": "How do you guarantee measurable results? <span>+</span>",
+        "faq.a1": "Starting with the diagnostic phase, we define clear KPIs aligned with your business objectives. Each solution includes tracking tools to measure impact and return on investment.",
+        "faq.q2": "Isn't AI only for large companies? <span>+</span>",
+        "faq.a2": "No. Nova Connexion specializes in making AI accessible to SMEs with simple, affordable and profitable tools.",
+        "faq.q3": "What are your typical implementation timelines? <span>+</span>",
+        "faq.a3": "After a quick diagnostic, the first concrete solutions can be deployed within a few weeks to generate quick wins.",
+        "contact.title": "Ready to accelerate your growth?",
+        "contact.subtitle": "Plan a free strategic consultation to assess your development potential.",
+        "contact.infoTitle": "Direct Contact",
+        "contact.zone": "📍 Service area: Across Canada",
+        "contact.phoneLabel": "Phone:",
+        "contact.emailLabel": "Email:",
+        "form.subject": "New diagnostic request - Nova Connexion",
+        "form.nameLabel": "Full Name *",
+        "form.namePlaceholder": "John Smith",
+        "form.companyLabel": "Company",
+        "form.companyPlaceholder": "Your SME name",
+        "form.emailLabel": "Professional Email *",
+        "form.emailPlaceholder": "name@company.ca",
+        "form.messageLabel": "Main Need",
+        "form.messagePlaceholder": "Briefly describe your challenge...",
+        "form.consent": "I agree that Nova Connexion may use my information to respond to my request, in accordance with the <a href=\"#confidentialite\">privacy policy</a>.",
+        "form.consentValue": "I accept the privacy policy",
+        "form.submit": "Request My Diagnostic",
+        "form.sending": "Sending...",
+        "form.success": "Thank you. Your request has been sent.",
+        "form.error": "The submission failed. You can also email us at <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+        "social.follow": "Follow us",
+        "social.aria": "Nova Connexion social media",
+        "privacy.title": "Privacy Policy",
+        "privacy.subtitle": "A clear explanation of how Nova Connexion handles information submitted through this site.",
+        "privacy.date": "Last updated: May 21, 2026",
+        "privacy.intro": "This policy explains how Nova Connexion collects, uses, shares, keeps and protects personal information submitted through this website, including through the contact form.",
+        "privacy.collectTitle": "1. Information we collect",
+        "privacy.collectText": "When you use the form, we may collect your name, company name, email address, message and consent to this policy. Technical information necessary for the site to operate may also be processed by our providers, such as IP address, browser used and pages visited.",
+        "privacy.useTitle": "2. How we use information",
+        "privacy.useOne": "To respond to your request and plan a consultation or diagnostic.",
+        "privacy.useTwo": "To communicate with you about our services.",
+        "privacy.useThree": "To improve our website, communications and internal processes.",
+        "privacy.useFour": "To meet legal obligations and protect our rights.",
+        "privacy.consentTitle": "3. Consent",
+        "privacy.consentText": "By submitting the form, you consent to Nova Connexion using the information provided to process your request. You may withdraw your consent at any time, subject to applicable legal obligations, by writing to <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+        "privacy.shareTitle": "4. Disclosure to service providers",
+        "privacy.shareText": "We do not sell personal information. We may use technical service providers to operate the site and receive forms, including Vercel for hosting, FormSubmit for form transmission, Google Fonts for typography and Unsplash for certain images. Links to LinkedIn, Facebook and Instagram lead to external platforms that apply their own policies. These providers may process information outside Quebec or Canada according to their own practices.",
+        "privacy.retentionTitle": "5. Retention and security",
+        "privacy.retentionText": "We keep information only as long as necessary for the purposes described in this policy or to meet legal obligations. We apply reasonable safeguards to protect information, but no Internet transmission can be guaranteed as perfectly secure.",
+        "privacy.rightsTitle": "6. Your rights",
+        "privacy.rightsText": "You may request access to your personal information, correction, withdrawal of consent or deletion where permitted by law. You may also ask a question or file a complaint about our privacy practices.",
+        "privacy.contactTitle": "7. Privacy Officer",
+        "privacy.contactText": "For any privacy request, contact Nova Connexion's Privacy Officer at <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+        "footer.description": "Your strategic partner for sustainable and measurable growth in Canada.",
+        "footer.solutionsTitle": "Solutions",
+        "footer.solutionOne": "Local Visibility",
+        "footer.solutionTwo": "AI Connexion",
+        "footer.solutionThree": "Operations Optimization",
+        "footer.contactTitle": "Contact",
+        "footer.privacy": "Privacy Policy",
+        "footer.copy": "&copy; 2026 Nova Connexion. All rights reserved. Visual identity: #042b46 & Montserrat."
+      }
+    };
 
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const answer = item.nextElementSibling;
-                const span = item.querySelector('span');
-                const isOpen = answer.style.display === 'block';
-                answer.style.display = isOpen ? 'none' : 'block';
-                if (span) span.innerText = isOpen ? '+' : '-';
-            });
-            item.nextElementSibling.style.display = 'none';
+    const languageSelect = document.getElementById('language-select');
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    const submitButton = document.getElementById('contact-submit');
+    const privacyConsent = document.getElementById('privacy-consent');
+    const formSubject = document.getElementById('form-subject');
+
+    function applyLanguage(lang) {
+      const dictionary = translations[lang] || translations.fr;
+      document.documentElement.lang = lang;
+      document.title = dictionary['meta.title'];
+      document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (dictionary[key]) element.innerHTML = dictionary[key];
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (dictionary[key]) element.setAttribute('placeholder', dictionary[key]);
+      });
+      document.querySelectorAll('[data-i18n-value]').forEach(element => {
+        const key = element.getAttribute('data-i18n-value');
+        if (dictionary[key]) element.value = dictionary[key];
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(element => {
+        const key = element.getAttribute('data-i18n-aria');
+        if (dictionary[key]) element.setAttribute('aria-label', dictionary[key]);
+      });
+      if (privacyConsent) privacyConsent.value = dictionary['form.consentValue'];
+      if (formSubject) formSubject.value = dictionary['form.subject'];
+      localStorage.setItem('nova-language', lang);
+    }
+
+    document.querySelectorAll('.faq-question').forEach(item => {
+      item.addEventListener('click', () => {
+        const answer = item.nextElementSibling;
+        const span = item.querySelector('span');
+        const isOpen = answer.style.display === 'block';
+        answer.style.display = isOpen ? 'none' : 'block';
+        if (span) span.innerText = isOpen ? '+' : '-';
+      });
+    });
+
+    languageSelect.addEventListener('change', event => applyLanguage(event.target.value));
+    const savedLanguage = localStorage.getItem('nova-language') || 'fr';
+    languageSelect.value = translations[savedLanguage] ? savedLanguage : 'fr';
+    applyLanguage(languageSelect.value);
+
+    contactForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const lang = languageSelect.value || 'fr';
+      const dictionary = translations[lang] || translations.fr;
+      const originalButtonText = submitButton.innerHTML;
+      submitButton.disabled = true;
+      submitButton.innerHTML = dictionary['form.sending'];
+      formStatus.className = 'form-status';
+      formStatus.innerText = '';
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
         });
-
-        languageSelect.addEventListener('change', event => {
-            applyLanguage(event.target.value);
-        });
-
-        const savedLanguage = localStorage.getItem('nova-language') || 'fr';
-        languageSelect.value = translations[savedLanguage] ? savedLanguage : 'fr';
-        applyLanguage(languageSelect.value);
-
-        contactForm.addEventListener('submit', async event => {
-            event.preventDefault();
-
-            const lang = languageSelect.value || 'fr';
-            const dictionary = translations[lang] || translations.fr;
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.disabled = true;
-            submitButton.innerHTML = dictionary['form.sending'];
-            formStatus.className = 'form-status';
-            formStatus.innerText = '';
-
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: new FormData(contactForm),
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (!response.ok) throw new Error('Submission failed');
-
-                contactForm.reset();
-                applyLanguage(lang);
-                formStatus.className = 'form-status success';
-                formStatus.innerHTML = dictionary['form.success'];
-            } catch (error) {
-                formStatus.className = 'form-status error';
-                formStatus.innerHTML = dictionary['form.error'];
-            } finally {
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-            }
-        });
-    </script>
+        if (!response.ok) throw new Error('Submission failed');
+        contactForm.reset();
+        applyLanguage(lang);
+        formStatus.className = 'form-status success';
+        formStatus.innerHTML = dictionary['form.success'];
+      } catch (error) {
+        formStatus.className = 'form-status error';
+        formStatus.innerHTML = dictionary['form.error'];
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+      }
+    });
+  </script>
 </body>
 </html>
