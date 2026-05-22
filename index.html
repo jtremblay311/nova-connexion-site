@@ -17,7 +17,6 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -60,12 +59,7 @@
             padding: 15px 0;
         }
 
-        .logo img {
-            height: 60px;
-            width: auto;
-            display: block;
-        }
-
+        .logo img { height: 60px; width: auto; display: block; }
         .nav-links { display: flex; gap: 25px; align-items: center; }
         .nav-links a { color: var(--primary-color); font-weight: 600; font-size: 0.9rem; }
         .nav-links a:not(.btn-contact):hover { color: var(--accent-color); }
@@ -182,6 +176,11 @@
         .contact-info p { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; color: #ccc; }
         .contact-info a { color: var(--white); font-weight: 600; }
         .contact-info a:hover { color: #ccc; }
+        .social-block { margin-top: 34px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; }
+        .social-title { margin-bottom: 14px !important; color: #fff !important; font-weight: 700; }
+        .social-links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .social-link { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: 10px 14px; border-radius: 4px; background: rgba(255,255,255,0.1); color: var(--white) !important; font-weight: 700; border: 1px solid rgba(255,255,255,0.2); }
+        .social-link:hover { background: var(--accent-color); color: var(--white) !important; transform: translateY(-2px); }
 
         .privacy-content { max-width: 900px; margin: 0 auto; }
         .privacy-content h3 { color: var(--primary-color); font-size: 1.25rem; margin: 35px 0 12px; }
@@ -208,7 +207,7 @@
             .nav-links { gap: 16px; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             body { padding-top: 92px; }
             .top-bar { display: none; }
             .nav-links { display: none; }
@@ -225,6 +224,7 @@
             .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
             .footer-logo img { margin: 0 auto 25px; }
             .contact-info p { align-items: flex-start; }
+            .social-links { justify-content: flex-start; }
         }
     </style>
 </head>
@@ -432,8 +432,13 @@
                         <p data-i18n="contact.zone">📍 Zone de service : Tout le Canada</p>
                         <p>📞 <span data-i18n="contact.phoneLabel">Téléphone :</span> <a href="tel:4507121562">450-712-1562</a></p>
                         <p>✉️ <span data-i18n="contact.emailLabel">Courriel :</span> <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a></p>
-                        <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                            <a href="#" style="font-size: 1.2rem;" data-i18n="contact.linkedin">Suivez-nous sur LinkedIn 🔗</a>
+                        <div class="social-block">
+                            <p class="social-title" data-i18n="social.follow">Suivez-nous</p>
+                            <div class="social-links" aria-label="Réseaux sociaux Nova Connexion" data-i18n-aria="social.aria">
+                                <a class="social-link" href="https://www.linkedin.com/company/nova-connexion" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                                <a class="social-link" href="https://www.facebook.com/profile.php?id=61587641420283&amp;mibextid=wwXIfr&amp;rdid=oD3Trgjgqk0qCR9x&amp;share_url" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                <a class="social-link" href="https://www.instagram.com/novaconnexion.inc" target="_blank" rel="noopener noreferrer">Instagram</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -465,7 +470,7 @@
                     <p data-i18n="privacy.consentText">En soumettant le formulaire, vous consentez à ce que Nova Connexion utilise les renseignements fournis pour traiter votre demande. Vous pouvez retirer votre consentement en tout temps, sous réserve des obligations légales applicables, en nous écrivant à <a href="mailto:info@novaconnexion.ca">info@novaconnexion.ca</a>.</p>
 
                     <h3 data-i18n="privacy.shareTitle">4. Communication à des fournisseurs</h3>
-                    <p data-i18n="privacy.shareText">Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.</p>
+                    <p data-i18n="privacy.shareText">Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Les liens vers LinkedIn, Facebook et Instagram mènent vers des plateformes externes qui appliquent leurs propres politiques. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.</p>
 
                     <h3 data-i18n="privacy.retentionTitle">5. Conservation et sécurité</h3>
                     <p data-i18n="privacy.retentionText">Nous conservons les renseignements seulement pendant la période nécessaire aux fins indiquées dans cette politique ou pour satisfaire à nos obligations légales. Nous appliquons des mesures raisonnables pour protéger les renseignements, mais aucune transmission par Internet ne peut être garantie comme étant parfaitement sécurisée.</p>
@@ -501,7 +506,9 @@
                         <li>📞 450-712-1562</li>
                         <li>✉️ info@novaconnexion.ca</li>
                         <li><a href="#confidentialite" data-i18n="footer.privacy">Politique de confidentialité</a></li>
-                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="https://www.linkedin.com/company/nova-connexion" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=61587641420283&amp;mibextid=wwXIfr&amp;rdid=oD3Trgjgqk0qCR9x&amp;share_url" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/novaconnexion.inc" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                     </ul>
                 </div>
             </div>
@@ -568,7 +575,6 @@
                 "contact.zone": "📍 Zone de service : Tout le Canada",
                 "contact.phoneLabel": "Téléphone :",
                 "contact.emailLabel": "Courriel :",
-                "contact.linkedin": "Suivez-nous sur LinkedIn 🔗",
                 "form.subject": "Nouvelle demande de diagnostic - Nova Connexion",
                 "form.nameLabel": "Nom Complet *",
                 "form.namePlaceholder": "Jean Dupont",
@@ -584,6 +590,8 @@
                 "form.sending": "Envoi en cours...",
                 "form.success": "Merci. Votre demande a bien été envoyée.",
                 "form.error": "L'envoi a échoué. Vous pouvez aussi nous écrire à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+                "social.follow": "Suivez-nous",
+                "social.aria": "Réseaux sociaux Nova Connexion",
                 "privacy.title": "Politique de confidentialité",
                 "privacy.subtitle": "Une explication claire de la façon dont Nova Connexion traite les renseignements transmis sur ce site.",
                 "privacy.date": "Dernière mise à jour : 21 mai 2026",
@@ -598,7 +606,7 @@
                 "privacy.consentTitle": "3. Consentement",
                 "privacy.consentText": "En soumettant le formulaire, vous consentez à ce que Nova Connexion utilise les renseignements fournis pour traiter votre demande. Vous pouvez retirer votre consentement en tout temps, sous réserve des obligations légales applicables, en nous écrivant à <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
                 "privacy.shareTitle": "4. Communication à des fournisseurs",
-                "privacy.shareText": "Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.",
+                "privacy.shareText": "Nous ne vendons pas vos renseignements personnels. Nous pouvons toutefois utiliser des fournisseurs techniques pour exploiter le site et recevoir les formulaires, notamment Vercel pour l'hébergement, FormSubmit pour la transmission des formulaires, Google Fonts pour la typographie et Unsplash pour certaines images. Les liens vers LinkedIn, Facebook et Instagram mènent vers des plateformes externes qui appliquent leurs propres politiques. Ces fournisseurs peuvent traiter des renseignements à l'extérieur du Québec ou du Canada selon leurs propres pratiques.",
                 "privacy.retentionTitle": "5. Conservation et sécurité",
                 "privacy.retentionText": "Nous conservons les renseignements seulement pendant la période nécessaire aux fins indiquées dans cette politique ou pour satisfaire à nos obligations légales. Nous appliquons des mesures raisonnables pour protéger les renseignements, mais aucune transmission par Internet ne peut être garantie comme étant parfaitement sécurisée.",
                 "privacy.rightsTitle": "6. Vos droits",
@@ -671,7 +679,6 @@
                 "contact.zone": "📍 Service area: Across Canada",
                 "contact.phoneLabel": "Phone:",
                 "contact.emailLabel": "Email:",
-                "contact.linkedin": "Follow us on LinkedIn 🔗",
                 "form.subject": "New diagnostic request - Nova Connexion",
                 "form.nameLabel": "Full Name *",
                 "form.namePlaceholder": "John Smith",
@@ -687,6 +694,8 @@
                 "form.sending": "Sending...",
                 "form.success": "Thank you. Your request has been sent.",
                 "form.error": "The submission failed. You can also email us at <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
+                "social.follow": "Follow us",
+                "social.aria": "Nova Connexion social media",
                 "privacy.title": "Privacy Policy",
                 "privacy.subtitle": "A clear explanation of how Nova Connexion handles information submitted through this site.",
                 "privacy.date": "Last updated: May 21, 2026",
@@ -701,7 +710,7 @@
                 "privacy.consentTitle": "3. Consent",
                 "privacy.consentText": "By submitting the form, you consent to Nova Connexion using the information provided to process your request. You may withdraw your consent at any time, subject to applicable legal obligations, by writing to <a href=\"mailto:info@novaconnexion.ca\">info@novaconnexion.ca</a>.",
                 "privacy.shareTitle": "4. Disclosure to service providers",
-                "privacy.shareText": "We do not sell personal information. We may use technical service providers to operate the site and receive forms, including Vercel for hosting, FormSubmit for form transmission, Google Fonts for typography and Unsplash for certain images. These providers may process information outside Quebec or Canada according to their own practices.",
+                "privacy.shareText": "We do not sell personal information. We may use technical service providers to operate the site and receive forms, including Vercel for hosting, FormSubmit for form transmission, Google Fonts for typography and Unsplash for certain images. Links to LinkedIn, Facebook and Instagram lead to external platforms that apply their own policies. These providers may process information outside Quebec or Canada according to their own practices.",
                 "privacy.retentionTitle": "5. Retention and security",
                 "privacy.retentionText": "We keep information only as long as necessary for the purposes described in this policy or to meet legal obligations. We apply reasonable safeguards to protect information, but no Internet transmission can be guaranteed as perfectly secure.",
                 "privacy.rightsTitle": "6. Your rights",
@@ -724,6 +733,7 @@
         const formStatus = document.getElementById('form-status');
         const submitButton = document.getElementById('contact-submit');
         const privacyConsent = document.getElementById('privacy-consent');
+        const formSubject = document.getElementById('form-subject');
 
         function applyLanguage(lang) {
             const dictionary = translations[lang] || translations.fr;
@@ -751,6 +761,7 @@
             });
 
             if (privacyConsent) privacyConsent.value = dictionary['form.consentValue'];
+            if (formSubject) formSubject.value = dictionary['form.subject'];
             localStorage.setItem('nova-language', lang);
         }
 
@@ -794,6 +805,7 @@
                 if (!response.ok) throw new Error('Submission failed');
 
                 contactForm.reset();
+                applyLanguage(lang);
                 formStatus.className = 'form-status success';
                 formStatus.innerHTML = dictionary['form.success'];
             } catch (error) {
