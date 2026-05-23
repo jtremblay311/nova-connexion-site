@@ -1,0 +1,45 @@
+name: Apply exact favicon
+
+on:
+  push:
+    paths:
+      - ".github/workflows/apply-exact-favicon.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch favicon links
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+          old = '''  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">'''
+          new = '''  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">'''
+
+          if 'href="favicon.png"' not in text:
+              if old not in text:
+                  raise SystemExit("favicon link pattern not found")
+              text = text.replace(old, new, 1)
+              path.write_text(text, encoding="utf-8")
+
+          workflow = Path(".github/workflows/apply-exact-favicon.yml")
+          if workflow.exists():
+              workflow.unlink()
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Use exact favicon image"
+          git push
