@@ -43,3 +43,5 @@ jobs:
           git add -A
           git diff --cached --quiet || git commit -m "Use exact favicon image"
           git push
+
+# trigger
