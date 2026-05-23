@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/receptionniste-ia",
+      "destination": "https://nova-receptionniste-ia.vercel.app/receptionniste-ia"
+    },
+    {
+      "source": "/receptionniste-ia/:path*",
+      "destination": "https://nova-receptionniste-ia.vercel.app/receptionniste-ia/:path*"
+    }
+  ]
+}
