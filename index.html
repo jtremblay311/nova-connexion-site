@@ -59,33 +59,105 @@
     }
     .top-bar a { margin-left: 20px; font-weight: 600; color: var(--white); }
     .top-bar a:hover { color: #d9f4f1; }
-    nav { display: flex; align-items: center; gap: 22px; padding: 14px 0; }
-    .logo img { display: block; height: 64px; width: auto; }
-    .nav-links { display: flex; align-items: center; gap: 24px; margin-left: auto; }
-    .nav-links a { color: var(--primary); font-size: 0.88rem; font-weight: 700; }
-    .nav-links a:hover { color: var(--accent); }
-    .btn-contact {
-      background: var(--primary);
-      color: var(--white) !important;
-      border-radius: 4px;
-      padding: 12px 22px;
-      text-transform: uppercase;
-      box-shadow: 0 10px 25px rgba(4, 43, 70, 0.16);
-    }
-    .btn-contact:hover { background: var(--accent); transform: translateY(-2px); }
-    .language-switcher { display: flex; align-items: center; gap: 8px; color: var(--primary); font-size: 0.85rem; font-weight: 700; }
-    .language-switcher select {
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      background: var(--white);
-      color: var(--primary);
-      font: inherit;
-      padding: 9px 10px;
-      cursor: pointer;
-      box-shadow: 0 8px 18px rgba(4, 43, 70, 0.06);
-    }
+   /* Navigation */
 
-    .nav-dropdown {
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 14px 0;
+}
+
+.logo {
+  flex: 0 0 auto;
+}
+
+.logo img {
+  display: block;
+  height: 64px;
+  width: auto;
+}
+
+.nav-panel {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-left: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: var(--primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+.btn-contact {
+  background: var(--primary);
+  color: var(--white) !important;
+  border-radius: 4px;
+  padding: 12px 22px;
+  text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(4, 43, 70, 0.16);
+}
+
+.btn-contact:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Sélecteur de langue professionnel */
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.22rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  box-shadow: 0 8px 18px rgba(4, 43, 70, 0.06);
+}
+
+.language-option {
+  min-width: 38px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--primary);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.language-option:hover {
+  color: var(--accent);
+}
+
+.language-option.is-active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* Dropdown Réceptionniste IA */
+
+.nav-dropdown {
   position: relative;
 }
 
@@ -124,7 +196,7 @@
   top: calc(100% + 14px);
   left: 0;
   z-index: 1001;
-  min-width: 270px;
+  min-width: 290px;
   padding: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -144,6 +216,25 @@
 .nav-dropdown-menu a:hover {
   background: var(--soft);
   color: var(--accent);
+}
+
+/* Hamburger mobile */
+
+.mobile-menu-toggle {
+  display: none;
+}
+
+.mobile-menu-bars {
+  width: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+.mobile-menu-bars span {
+  display: block;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary);
 }
     
     .hero {
@@ -298,19 +389,151 @@
     .copy { padding-top: 28px; text-align: center; color: rgba(255, 255, 255, 0.5); border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; }
 
     @media (max-width: 992px) {
-      body { padding-top: 92px; }
-      .top-bar, .nav-links { display: none; }
-      nav { padding: 12px 0; }
-      .logo img { height: 52px; }
-      .language-switcher { margin-left: auto; }
-      .language-switcher label { display: none; }
-      .hero { min-height: 560px; padding: 80px 0; }
-      .grid-2, .grid-3, .methodo-steps, .contact-container, .footer-grid { grid-template-columns: 1fr; }
-      .card, .advantage-panel, .contact-info { padding: 34px; }
-      .contact-container, .privacy-content { padding: 28px; }
-      .footer-grid { text-align: center; gap: 40px; }
-      .footer-logo img { margin: 0 auto 24px; }
-    }
+  body {
+    padding-top: 92px;
+  }
+
+  .top-bar {
+    display: none;
+  }
+
+  .main-nav {
+    position: relative;
+    padding: 12px 0;
+  }
+
+  .logo img {
+    height: 52px;
+  }
+
+  .mobile-menu-toggle {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-left: auto;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--white);
+    color: var(--primary);
+    padding: 0.65rem 0.9rem;
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(4, 43, 70, 0.08);
+  }
+
+  .nav-panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.7rem);
+    left: 24px;
+    right: 24px;
+    z-index: 1002;
+    margin-left: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+    padding: 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow-strong);
+    backdrop-filter: blur(16px);
+  }
+
+  .nav-panel.is-open {
+    display: flex;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.35rem;
+    margin-left: 0;
+  }
+
+  .nav-links a,
+  .nav-dropdown summary {
+    width: 100%;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.75rem 0.85rem;
+    border-radius: 10px;
+    font-size: 0.95rem;
+  }
+
+  .nav-links a:hover,
+  .nav-dropdown summary:hover {
+    background: var(--soft);
+  }
+
+  .btn-contact {
+    justify-content: center !important;
+    margin-top: 0.35rem;
+  }
+
+  .nav-dropdown {
+    width: 100%;
+  }
+
+  .nav-dropdown-menu {
+    position: static;
+    width: 100%;
+    min-width: 0;
+    margin-top: 0.35rem;
+    border-radius: 12px;
+    background: var(--soft);
+    box-shadow: none;
+  }
+
+  .language-switcher {
+    width: 100%;
+    justify-content: space-between;
+    border-radius: 14px;
+  }
+
+  .language-option {
+    flex: 1;
+  }
+
+  .hero {
+    min-height: 560px;
+    padding: 80px 0;
+  }
+
+  .grid-2,
+  .grid-3,
+  .methodo-steps,
+  .contact-container,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .advantage-panel,
+  .contact-info {
+    padding: 34px;
+  }
+
+  .contact-container,
+  .privacy-content {
+    padding: 28px;
+  }
+
+  .footer-grid {
+    text-align: center;
+    gap: 40px;
+  }
+
+  .footer-logo img {
+    margin: 0 auto 24px;
+  }
+}
 
     @media (max-width: 560px) {
       .container { width: min(100% - 32px, 1200px); }
@@ -330,32 +553,58 @@
         <a href="mailto:info@novaconnexion.ca">✉️ info@novaconnexion.ca</a>
       </div>
     </div>
-    <nav class="container">
-      <a href="#" class="logo" aria-label="Nova Connexion"><img src="logo.png" alt="Nova Connexion - Logo"></a>
-      <div class="nav-links">
-        <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
-        <details class="nav-dropdown">
-  <summary data-i18n="nav.receptionniste">Réceptionniste IA</summary>
-  <div class="nav-dropdown-menu">
-    <a href="/receptionniste-ia/receptionniste-ia-pme-quebec">PME au Québec</a>
-    <a href="/receptionniste-ia/receptionniste-ia-courtiers-immobiliers">Courtiers immobiliers</a>
-    <a href="/receptionniste-ia/receptionniste-ia-cliniques">Cliniques</a>
-    <a href="/receptionniste-ia/receptionniste-ia-entrepreneurs-services-locaux">Entrepreneurs</a>
-    <a href="/receptionniste-ia/tarifs">Tarifs</a>
-    <a href="/receptionniste-ia/demo">Démo</a>
-    <a href="/receptionniste-ia/blog">Blog</a>
+    <nav class="container main-nav">
+  <a href="#" class="logo" aria-label="Nova Connexion">
+    <img src="logo.png" alt="Nova Connexion - Logo">
+  </a>
+
+  <button
+    class="mobile-menu-toggle"
+    type="button"
+    aria-controls="main-navigation"
+    aria-expanded="false"
+  >
+    <span class="mobile-menu-bars" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <span>Menu</span>
+  </button>
+
+  <div class="nav-panel" id="main-navigation">
+    <div class="nav-links">
+      <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
+
+      <details class="nav-dropdown">
+        <summary data-i18n="nav.receptionniste">Réceptionniste IA</summary>
+        <div class="nav-dropdown-menu">
+          <a href="/receptionniste-ia/receptionniste-ia-pme-quebec">PME au Québec</a>
+          <a href="/receptionniste-ia/receptionniste-ia-courtiers-immobiliers">Courtiers immobiliers</a>
+          <a href="/receptionniste-ia/receptionniste-ia-cliniques">Cliniques</a>
+          <a href="/receptionniste-ia/receptionniste-ia-entrepreneurs-services-locaux">Entrepreneurs</a>
+          <a href="/receptionniste-ia/tarifs">Tarifs</a>
+          <a href="/receptionniste-ia/demo">Démo</a>
+          <a href="/receptionniste-ia/blog">Blog</a>
+        </div>
+      </details>
+
+      <a href="#approche" data-i18n="nav.approach">Approche</a>
+      <a href="#methode" data-i18n="nav.method">Méthodologie</a>
+      <a href="#confidentialite" data-i18n="nav.privacy">Confidentialité</a>
+      <a href="#contact" class="btn-contact" data-i18n="nav.cta">Consultation Gratuite</a>
+    </div>
+
+    <div class="language-switcher" aria-label="Sélecteur de langue" data-i18n-aria="lang.switcherLabel">
+      <button class="language-option is-active" type="button" data-lang="fr" aria-pressed="true">
+        FR
+      </button>
+      <button class="language-option" type="button" data-lang="en" aria-pressed="false">
+        EN
+      </button>
+    </div>
   </div>
-</details>
-        <a href="#approche" data-i18n="nav.approach">Approche</a>
-        <a href="#methode" data-i18n="nav.method">Méthodologie</a>
-        <a href="#confidentialite" data-i18n="nav.privacy">Confidentialité</a>
-        <a href="#contact" class="btn-contact" data-i18n="nav.cta">Consultation Gratuite</a>
-      </div>
-      <div class="language-switcher" aria-label="Sélecteur de langue" data-i18n-aria="lang.switcherLabel">
-        <label for="language-select" data-i18n="lang.label">Langue</label>
-        <select id="language-select"><option value="fr">FR</option><option value="en">EN</option></select>
-      </div>
-    </nav>
+</nav>
   </header>
 
   <main>
@@ -707,7 +956,56 @@
       }
     };
 
-    const languageSelect = document.getElementById('language-select');
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navPanel = document.querySelector('.nav-panel');
+const navDropdowns = document.querySelectorAll('.nav-dropdown');
+
+function closeMainMenu() {
+  navPanel?.classList.remove('is-open');
+  mobileMenuToggle?.setAttribute('aria-expanded', 'false');
+  navDropdowns.forEach(dropdown => {
+    dropdown.open = false;
+  });
+}
+
+mobileMenuToggle?.addEventListener('click', event => {
+  event.stopPropagation();
+  const isOpen = navPanel?.classList.toggle('is-open');
+  mobileMenuToggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+});
+
+document.addEventListener('click', event => {
+  const target = event.target;
+
+  if (!(target instanceof Node)) {
+    return;
+  }
+
+  const clickedInsideNav = navPanel?.contains(target) || mobileMenuToggle?.contains(target);
+
+  if (!clickedInsideNav) {
+    closeMainMenu();
+  }
+
+  navDropdowns.forEach(dropdown => {
+    if (!dropdown.contains(target)) {
+      dropdown.open = false;
+    }
+  });
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    closeMainMenu();
+  }
+});
+
+document.querySelectorAll('.nav-panel a').forEach(link => {
+  link.addEventListener('click', closeMainMenu);
+});
+    
+    const languageButtons = document.querySelectorAll('[data-lang]');
+let currentLanguage = localStorage.getItem('nova-language') || 'fr';
     const contactForm = document.getElementById('contact-form');
     const formStatus = document.getElementById('form-status');
     const submitButton = document.getElementById('contact-submit');
@@ -736,6 +1034,13 @@
       });
       if (privacyConsent) privacyConsent.value = dictionary['form.consentValue'];
       if (formSubject) formSubject.value = dictionary['form.subject'];
+      currentLanguage = lang;
+
+languageButtons.forEach(button => {
+  const isActive = button.dataset.lang === lang;
+  button.classList.toggle('is-active', isActive);
+  button.setAttribute('aria-pressed', String(isActive));
+});
       localStorage.setItem('nova-language', lang);
     }
 
@@ -749,14 +1054,19 @@
       });
     });
 
-    languageSelect.addEventListener('change', event => applyLanguage(event.target.value));
-    const savedLanguage = localStorage.getItem('nova-language') || 'fr';
-    languageSelect.value = translations[savedLanguage] ? savedLanguage : 'fr';
-    applyLanguage(languageSelect.value);
+    languageButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const lang = button.dataset.lang || 'fr';
+    applyLanguage(translations[lang] ? lang : 'fr');
+  });
+});
+
+currentLanguage = translations[currentLanguage] ? currentLanguage : 'fr';
+applyLanguage(currentLanguage);
 
     contactForm.addEventListener('submit', async event => {
       event.preventDefault();
-      const lang = languageSelect.value || 'fr';
+      const lang = currentLanguage || 'fr';
       const dictionary = translations[lang] || translations.fr;
       const originalButtonText = submitButton.innerHTML;
       submitButton.disabled = true;
