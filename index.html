@@ -480,6 +480,15 @@
     display: flex;
   }
 
+.nav-links a.btn-contact.is-active {
+  background: var(--primary);
+  color: var(--white) !important;
+}
+
+.nav-links a.btn-contact.is-active::after {
+  display: none;
+}
+      
   .nav-links {
     display: flex;
     flex-direction: column;
@@ -1037,7 +1046,7 @@ document.querySelectorAll('.nav-panel a').forEach(link => {
   link.addEventListener('click', closeMainMenu);
 });
 
-const sectionNavLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const sectionNavLinks = document.querySelectorAll('.nav-links a[href^="#"]:not(.btn-contact)');
 const receptionistDropdown = document.querySelector('.nav-dropdown');
 const receptionistLinks = document.querySelectorAll('.nav-dropdown-menu a');
 
@@ -1068,7 +1077,7 @@ function updateActiveNavigation() {
   }
 
   if (currentHash) {
-    const activeLink = document.querySelector(`.nav-links a[href="${currentHash}"]`);
+    const activeLink = document.querySelector(`.nav-links a[href="${currentHash}"]:not(.btn-contact)`);
 
     if (activeLink) {
       activeLink.classList.add('is-active');
@@ -1088,7 +1097,7 @@ function updateActiveNavigation() {
   });
 
   if (activeSectionId) {
-    const activeLink = document.querySelector(`.nav-links a[href="#${activeSectionId}"]`);
+    const activeLink = document.querySelector(`.nav-links a[href="#${activeSectionId}"]:not(.btn-contact)`);
 
     if (activeLink) {
       activeLink.classList.add('is-active');
