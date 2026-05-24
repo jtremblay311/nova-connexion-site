@@ -101,6 +101,39 @@
   color: var(--accent);
 }
 
+/* Indicateur léger de section/page active */
+
+.nav-links a.is-active,
+.nav-dropdown.is-active > summary {
+  color: var(--accent);
+  background: rgba(18, 163, 155, 0.08);
+  border-radius: 6px;
+}
+
+@media (min-width: 993px) {
+  .nav-links a.is-active,
+  .nav-dropdown.is-active > summary {
+    position: relative;
+  }
+
+  .nav-links a.is-active::after,
+  .nav-dropdown.is-active > summary::before {
+    content: "";
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: -8px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--warm));
+  }
+}
+
+.nav-dropdown-menu a.is-active {
+  background: var(--soft);
+  color: var(--accent);
+}
+    
 .btn-contact {
   background: var(--primary);
   color: var(--white) !important;
@@ -1003,6 +1036,69 @@ document.addEventListener('keydown', event => {
 document.querySelectorAll('.nav-panel a').forEach(link => {
   link.addEventListener('click', closeMainMenu);
 });
+
+const sectionNavLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+const receptionistDropdown = document.querySelector('.nav-dropdown');
+const receptionistLinks = document.querySelectorAll('.nav-dropdown-menu a');
+
+function clearActiveNavigation() {
+  document.querySelectorAll('.nav-links a.is-active, .nav-dropdown.is-active, .nav-dropdown-menu a.is-active').forEach(element => {
+    element.classList.remove('is-active');
+  });
+}
+
+function updateActiveNavigation() {
+  clearActiveNavigation();
+
+  const currentPath = window.location.pathname;
+  const currentHash = window.location.hash;
+
+  if (currentPath.startsWith('/receptionniste-ia')) {
+    receptionistDropdown?.classList.add('is-active');
+
+    receptionistLinks.forEach(link => {
+      const href = link.getAttribute('href') || '';
+
+      if (href === currentPath) {
+        link.classList.add('is-active');
+      }
+    });
+
+    return;
+  }
+
+  if (currentHash) {
+    const activeLink = document.querySelector(`.nav-links a[href="${currentHash}"]`);
+
+    if (activeLink) {
+      activeLink.classList.add('is-active');
+      return;
+    }
+  }
+
+  const sections = Array.from(document.querySelectorAll('main section[id]'));
+  const scrollPosition = window.scrollY + 180;
+
+  let activeSectionId = '';
+
+  sections.forEach(section => {
+    if (section.offsetTop <= scrollPosition) {
+      activeSectionId = section.id;
+    }
+  });
+
+  if (activeSectionId) {
+    const activeLink = document.querySelector(`.nav-links a[href="#${activeSectionId}"]`);
+
+    if (activeLink) {
+      activeLink.classList.add('is-active');
+    }
+  }
+}
+
+window.addEventListener('scroll', updateActiveNavigation, { passive: true });
+window.addEventListener('hashchange', updateActiveNavigation);
+updateActiveNavigation();
     
     const languageButtons = document.querySelectorAll('[data-lang]');
 let currentLanguage = localStorage.getItem('nova-language') || 'fr';
