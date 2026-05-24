@@ -612,13 +612,13 @@
       <details class="nav-dropdown">
         <summary data-i18n="nav.receptionniste">Réceptionniste IA</summary>
         <div class="nav-dropdown-menu">
-          <a href="/receptionniste-ia/receptionniste-ia-pme-quebec">PME au Québec</a>
-          <a href="/receptionniste-ia/receptionniste-ia-courtiers-immobiliers">Courtiers immobiliers</a>
-          <a href="/receptionniste-ia/receptionniste-ia-cliniques">Cliniques</a>
-          <a href="/receptionniste-ia/receptionniste-ia-entrepreneurs-services-locaux">Entrepreneurs</a>
-          <a href="/receptionniste-ia/tarifs">Tarifs</a>
-          <a href="/receptionniste-ia/demo">Démo</a>
-          <a href="/receptionniste-ia/blog">Blog</a>
+          <a data-receptionnist-link="pme" href="/receptionniste-ia/receptionniste-ia-pme-quebec">PME au Québec</a>
+<a data-receptionnist-link="realtors" href="/receptionniste-ia/receptionniste-ia-courtiers-immobiliers">Courtiers immobiliers</a>
+<a data-receptionnist-link="clinics" href="/receptionniste-ia/receptionniste-ia-cliniques">Cliniques</a>
+<a data-receptionnist-link="contractors" href="/receptionniste-ia/receptionniste-ia-entrepreneurs-services-locaux">Entrepreneurs</a>
+<a data-receptionnist-link="pricing" href="/receptionniste-ia/tarifs">Tarifs</a>
+<a data-receptionnist-link="demo" href="/receptionniste-ia/demo">Démo</a>
+<a data-receptionnist-link="blog" href="/receptionniste-ia/blog">Blog</a>
         </div>
       </details>
 
@@ -1137,6 +1137,7 @@ languageButtons.forEach(button => {
   button.classList.toggle('is-active', isActive);
   button.setAttribute('aria-pressed', String(isActive));
 });
+      updateReceptionistLinks(lang);
       localStorage.setItem('nova-language', lang);
     }
 
@@ -1156,6 +1157,93 @@ languageButtons.forEach(button => {
     applyLanguage(translations[lang] ? lang : 'fr');
   });
 });
+
+const receptionistLinksByLanguage = {
+  fr: {
+    pme: {
+      label: "PME au Québec",
+      href: "/receptionniste-ia/receptionniste-ia-pme-quebec",
+    },
+    realtors: {
+      label: "Courtiers immobiliers",
+      href: "/receptionniste-ia/receptionniste-ia-courtiers-immobiliers",
+    },
+    clinics: {
+      label: "Cliniques",
+      href: "/receptionniste-ia/receptionniste-ia-cliniques",
+    },
+    contractors: {
+      label: "Entrepreneurs",
+      href: "/receptionniste-ia/receptionniste-ia-entrepreneurs-services-locaux",
+    },
+    pricing: {
+      label: "Tarifs",
+      href: "/receptionniste-ia/tarifs",
+    },
+    demo: {
+      label: "Démo",
+      href: "/receptionniste-ia/demo",
+    },
+    blog: {
+      label: "Blog",
+      href: "/receptionniste-ia/blog",
+    },
+  },
+  en: {
+    pme: {
+      label: "SMBs in Quebec",
+      href: "/receptionniste-ia/en/ai-receptionist-smb-quebec",
+    },
+    realtors: {
+      label: "Real estate agents",
+      href: "/receptionniste-ia/en/ai-receptionist-real-estate-agents",
+    },
+    clinics: {
+      label: "Clinics",
+      href: "/receptionniste-ia/en/ai-receptionist-clinics",
+    },
+    contractors: {
+      label: "Contractors",
+      href: "/receptionniste-ia/en/ai-phone-assistant-contractors",
+    },
+    pricing: {
+      label: "Pricing",
+      href: "/receptionniste-ia/en/pricing",
+    },
+    demo: {
+      label: "Demo",
+      href: "/receptionniste-ia/en/demo",
+    },
+    blog: {
+      label: "Blog",
+      href: "/receptionniste-ia/en/blog",
+    },
+  },
+};
+
+function updateReceptionistLinks(lang) {
+  document.querySelectorAll("[data-receptionnist-link]").forEach((link) => {
+    const key = link.dataset.receptionnistLink;
+    const config = receptionistLinksByLanguage[lang]?.[key];
+
+    if (!config) {
+      return;
+    }
+
+    link.href = config.href;
+    link.textContent = config.label;
+  });
+}
+    
+const urlLanguage = new URLSearchParams(window.location.search).get('lang');
+
+if (urlLanguage && translations[urlLanguage]) {
+  currentLanguage = urlLanguage;
+  localStorage.setItem('nova-language', urlLanguage);
+
+  const cleanUrl = `${window.location.origin}${window.location.pathname}${window.location.hash}`;
+  window.history.replaceState({}, document.title, cleanUrl);
+}
 
 currentLanguage = translations[currentLanguage] ? currentLanguage : 'fr';
 applyLanguage(currentLanguage);
