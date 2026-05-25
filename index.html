@@ -749,11 +749,10 @@
       <div class="container">
         <div class="section-title"><h2 data-i18n="contact.title">Prêt à accélérer votre croissance ?</h2><p data-i18n="contact.subtitle">Planifiez une consultation stratégique gratuite pour auditer votre potentiel de développement.</p></div>
         <div class="contact-container">
-          <form id="contact-form" action="https://formsubmit.co/info@novaconnexion.ca" method="POST">
-            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-            <input id="form-subject" type="hidden" name="_subject" value="Nouvelle demande de diagnostic - Nova Connexion" data-i18n-value="form.subject">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
+          <form id="contact-form" action="/api/contact-request" method="POST">
+            <input type="text" name="website_url" style="display:none" tabindex="-1" autocomplete="off">
+<input id="form-subject" type="hidden" name="subject" value="Nouvelle demande de diagnostic - Nova Connexion" data-i18n-value="form.subject">
+<input type="hidden" name="source" value="nova_connexion_site_principal">
             <div class="grid-2" style="gap: 20px;"><div class="form-group"><label for="nom" data-i18n="form.nameLabel">Nom Complet *</label><input id="nom" name="nom" type="text" placeholder="Jean Dupont" data-i18n-placeholder="form.namePlaceholder" autocomplete="name" required></div><div class="form-group"><label for="entreprise" data-i18n="form.companyLabel">Entreprise</label><input id="entreprise" name="entreprise" type="text" placeholder="Nom de votre PME" data-i18n-placeholder="form.companyPlaceholder" autocomplete="organization"></div></div>
             <div class="form-group"><label for="email" data-i18n="form.emailLabel">Courriel Professionnel *</label><input id="email" name="email" type="email" placeholder="nom@entreprise.ca" data-i18n-placeholder="form.emailPlaceholder" autocomplete="email" required></div>
             <div class="form-group"><label for="message" data-i18n="form.messageLabel">Votre Besoin Principal</label><textarea id="message" name="message" rows="5" placeholder="Décrivez brièvement votre défi..." data-i18n-placeholder="form.messagePlaceholder"></textarea></div>
@@ -1277,33 +1276,51 @@ currentLanguage = translations[currentLanguage] ? currentLanguage : 'fr';
 applyLanguage(currentLanguage);
 
     contactForm.addEventListener('submit', async event => {
-      event.preventDefault();
-      const lang = currentLanguage || 'fr';
-      const dictionary = translations[lang] || translations.fr;
-      const originalButtonText = submitButton.innerHTML;
-      submitButton.disabled = true;
-      submitButton.innerHTML = dictionary['form.sending'];
-      formStatus.className = 'form-status';
-      formStatus.innerText = '';
-      try {
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' }
-        });
-        if (!response.ok) throw new Error('Submission failed');
-        contactForm.reset();
-        applyLanguage(lang);
-        formStatus.className = 'form-status success';
-        formStatus.innerHTML = dictionary['form.success'];
-      } catch (error) {
-        formStatus.className = 'form-status error';
-        formStatus.innerHTML = dictionary['form.error'];
-      } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-      }
+  event.preventDefault();
+
+  const lang = currentLanguage || 'fr';
+  const dictionary = translations[lang] || translations.fr;
+  const originalButtonText = submitButton.innerHTML;
+
+  submitButton.disabled = true;
+  submitButton.innerHTML = dictionary['form.sending'];
+  formStatus.className = 'form-status';
+  formStatus.innerText = '';
+
+  const formData = new FormData(contactForm);
+  const payload = Object.fromEntries(formData.entries());
+
+  payload.language = lang;
+  payload.submitted_at = new Date().toISOString();
+  payload.page_url = window.location.href;
+
+  try {
+    const response = await fetch('/api/contact-request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
     });
+
+    if (!response.ok) {
+      throw new Error('Submission failed');
+    }
+
+    contactForm.reset();
+    applyLanguage(lang);
+
+    formStatus.className = 'form-status success';
+    formStatus.innerHTML = dictionary['form.success'];
+  } catch (error) {
+    formStatus.className = 'form-status error';
+    formStatus.innerHTML = dictionary['form.error'];
+  } finally {
+    submitButton.disabled = false;
+    submitButton.innerHTML = originalButtonText;
+  }
+});
   </script>
 </body>
 </html>
