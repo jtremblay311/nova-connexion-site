@@ -15,11 +15,19 @@ export default async function handler(request, response) {
     });
   }
 
-  const requiredFields = ["prenom", "nom", "email", "consentement_confidentialite"];
+  const requiredFields = ["email", "consentement_confidentialite"];
 
   const missing = requiredFields.filter((field) => {
     return !body[field] || String(body[field]).trim().length === 0;
   });
+
+  const firstName = String(body.prenom || "").trim();
+  const lastName = String(body.nom || "").trim();
+  const fullName = [firstName, lastName].filter(Boolean).join(" ") || lastName;
+
+  if (!fullName) {
+    missing.push("nom");
+  }
 
   const emailIsValid =
     typeof body.email === "string" &&
@@ -47,9 +55,9 @@ export default async function handler(request, response) {
   const payload = {
     source: body.source || "nova_connexion_site_principal",
     form_type: "diagnostic_site_principal",
-    first_name: body.prenom || "",
-    last_name: body.nom || "",
-    full_name: [body.prenom, body.nom].filter(Boolean).join(" "),
+    first_name: firstName,
+    last_name: lastName,
+    full_name: fullName,
     company_name: body.entreprise || "",
     phone: body.telephone || "",
     email: body.email || "",
