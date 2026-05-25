@@ -15,7 +15,7 @@ export default async function handler(request, response) {
     });
   }
 
-  const requiredFields = ["nom", "email", "consentement_confidentialite"];
+  const requiredFields = ["prenom", "nom", "email", "consentement_confidentialite"];
 
   const missing = requiredFields.filter((field) => {
     return !body[field] || String(body[field]).trim().length === 0;
@@ -47,8 +47,11 @@ export default async function handler(request, response) {
   const payload = {
     source: body.source || "nova_connexion_site_principal",
     form_type: "diagnostic_site_principal",
-    full_name: body.nom || "",
+    first_name: body.prenom || "",
+    last_name: body.nom || "",
+    full_name: [body.prenom, body.nom].filter(Boolean).join(" "),
     company_name: body.entreprise || "",
+    phone: body.telephone || "",
     email: body.email || "",
     main_need: body.message || "",
     consent: body.consentement_confidentialite || "",
