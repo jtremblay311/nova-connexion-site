@@ -1,4 +1,6 @@
 {
+  "buildCommand": "node scripts/apply-contact-form-fields.js",
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/receptionniste-ia",
