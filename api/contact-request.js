@@ -23,6 +23,8 @@ export default async function handler(request, response) {
 
   const firstName = String(body.prenom || "").trim();
   const lastName = String(body.nom || "").trim();
+  const phone = String(body.telephone || body.phone || "").trim();
+  const message = String(body.message || "").trim();
   const fullName = [firstName, lastName].filter(Boolean).join(" ") || lastName;
 
   if (!fullName) {
@@ -52,16 +54,33 @@ export default async function handler(request, response) {
     });
   }
 
+  const contactSummary = [
+    `Prénom: ${firstName || "-"}`,
+    `Nom: ${lastName || "-"}`,
+    `Téléphone: ${phone || "Non fourni"}`,
+    `Courriel: ${body.email || ""}`,
+    `Entreprise: ${body.entreprise || ""}`,
+  ].join("\n");
+
+  const mainNeedWithContact = [message, contactSummary].filter(Boolean).join("\n\n");
+
   const payload = {
     source: body.source || "nova_connexion_site_principal",
     form_type: "diagnostic_site_principal",
+    prenom: firstName,
+    nom: lastName,
+    telephone: phone,
+    numero_telephone: phone,
+    phone_number: phone,
     first_name: firstName,
     last_name: lastName,
     full_name: fullName,
     company_name: body.entreprise || "",
-    phone: body.telephone || "",
+    phone,
     email: body.email || "",
-    main_need: body.message || "",
+    message: mainNeedWithContact,
+    main_need: mainNeedWithContact,
+    contact_summary: contactSummary,
     consent: body.consentement_confidentialite || "",
     language: body.language || "fr",
     page_url: body.page_url || "",
